@@ -142,7 +142,27 @@
   .kicker{color:var(--muted); letter-spacing:.4px; text-transform:uppercase; font-size:12px}
   .lead{color:#cfd3e6}
   .hero-card{background:var(--glass); border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
-  
+  /* Tiles dans la colonne droite du hero */
+  .hero-tiles{
+    display:grid;
+    grid-template-columns: 1fr;   /* mobile : 1 colonne */
+    gap: 14px;
+  }
+
+  /* Égaliser la hauteur des cartes si besoin */
+  .hero-tiles .card{
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* Dès tablette : 2 colonnes (2x2) */
+  @media (min-width: 760px){
+    .hero-tiles{
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+  }
+
   .tiles{display:grid; grid-template-columns:1fr; gap:16px; padding:20px}
   .tile{position:relative; overflow:hidden}
   .tile h3{margin:0 0 8px}
@@ -191,7 +211,7 @@
   @media (min-width:760px){
     .menu{position:static; display:flex; flex-direction:row; background:transparent; border:none; padding:0; box-shadow:none}
     .hamburger{display:none}
-    .hero{grid-template-columns:1.2fr .8fr; padding:56px 28px 18px}
+    .hero{grid-template-columns:1.2fr .8fr; padding:56px 28px 28px}
     h1{font-size: clamp(32px, 4.5vw, 48px);}  /* bigger on desktop */
     .tiles{grid-template-columns:repeat(2,1fr); gap:18px; padding:28px}
   }
