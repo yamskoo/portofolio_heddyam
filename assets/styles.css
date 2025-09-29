@@ -145,21 +145,30 @@
   /* Tiles dans la colonne droite du hero */
   .hero-tiles{
     display:grid;
-    grid-template-columns: 1fr;   /* mobile : 1 colonne */
-    gap: 14px;
+    grid-template-columns: minmax(0,1fr);   /* mobile : 1 colonne */
+    gap: 16px;
   }
 
   /* Égaliser la hauteur des cartes si besoin */
   .hero-tiles .card{
-    display:flex;
-    flex-direction:column;
+    display:flex; flex-direction:column;
+    height:100%;
   }
+
+  /* Tighter headings & text inside the 4 tiles */
+  .hero-tiles h3{ margin:6px 0 6px; font-size:clamp(18px,2.2vw,22px); }
+  .hero-tiles p{ margin:0; font-size:15.5px; line-height:1.6; }
+
+  /* Add a bit more separation visually */
+  .hero-tiles .card{ border-color: rgba(255,255,255,.10); }
+
+  .hero-tiles .tile::after{ display:none; }
 
   /* Dès tablette : 2 colonnes (2x2) */
   @media (min-width: 760px){
     .hero-tiles{
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 18px;
     }
   }
 
@@ -167,8 +176,13 @@
   .tile{position:relative; overflow:hidden}
   .tile h3{margin:0 0 8px}
   .badge{display:inline-block; padding:6px 10px; font-size:12px; border-radius:999px; background:linear-gradient(45deg,var(--accent),var(--accent-2)); box-shadow:0 6px 16px rgba(124,58,237,.35)}
-  .tile::after{content:""; position:absolute; inset:-20% -40% auto auto; height:160px; width:160px; background:radial-gradient(closest-side, rgba(124,58,237,.3), transparent); transform:rotate(25deg)}
-  
+  .tile::after{ 
+    content:""; position:absolute; inset:-20% -40% auto auto;
+    height:160px; width:160px;
+    background:radial-gradient(closest-side, rgba(124,58,237,.3), transparent);
+    transform:rotate(25deg)
+  } 
+
   .section{padding:38px 20px}
   .section h2{margin:0 0 6px}
   .section p{color:#cfd3e6}
@@ -211,7 +225,13 @@
   @media (min-width:760px){
     .menu{position:static; display:flex; flex-direction:row; background:transparent; border:none; padding:0; box-shadow:none}
     .hamburger{display:none}
-    .hero{grid-template-columns:1.2fr .8fr; padding:56px 28px 28px}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;   /* left text / right tiles */
+      align-items:start;
+      gap: 28px;
+      padding:56px 28px 28px;
+    }
     h1{font-size: clamp(32px, 4.5vw, 48px);}  /* bigger on desktop */
     .tiles{grid-template-columns:repeat(2,1fr); gap:18px; padding:28px}
   }
