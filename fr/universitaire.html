@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projets Universitaires · Yamine</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="brand"><span class="dot"></span> Yamine</div>
+    <nav class="menu">
+      <a href="index.html">Accueil</a>
+      <a href="professionnel.html">Pro</a>
+      <a href="contact.html">Contact</a>
+      <a href="../en/academic.html">EN</a>
+    </nav>
+  </header>
+
+  <section class="section reveal">
+    <h2 class="glow">Projets Universitaires</h2>
+    <p>Robotique, ROS2, Unity, CI/CD, PLM et data.</p>
+
+    <div class="timeline">
+      <article class="entry">
+        <div class="where">RobAFIS (2024 & 2025) — 4ᵉ place</div>
+        <div class="when">Concours national de robotique</div>
+        <ul>
+          <li>Robots autonomes (calcul binaire, tri de déchets), analyse du besoin, architecture technique.</li>
+          <li>Documentation, tests et déploiement terrain.</li>
+        </ul>
+      </article>
+
+      <article class="entry">
+        <div class="where">Simulation robotique — TurtleBot3 & UR5e</div>
+        <div class="when">C++, ROS2</div>
+        <ul>
+          <li>Navigation autonome, manipulation ; approche simulation-first.</li>
+        </ul>
+      </article>
+
+      <article class="entry">
+        <div class="where">Logiciels industriels & data</div>
+        <div class="when">Unity 2D/VR, SQL, modèles de détection</div>
+        <ul>
+          <li>IA, moteurs de jeux et systèmes de données pour livrer démos et outils interactifs.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <footer>© <span id="y"></span> Yamine</footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <script src="../assets/script.js"></script>
+</body>
+</html>

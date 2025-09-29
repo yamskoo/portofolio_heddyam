@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Heddy Yamine Kasko · Portfolio (FR)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css" />
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <header class="nav">
+    <div class="brand"><span class="dot"></span> Yamine · Portfolio</div>
+    <nav class="menu">
+      <a href="../en/">EN</a>
+      <a href="professionnel.html">Exp. Pro</a>
+      <a href="universitaire.html">Universitaire</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="reveal">
+      <div class="kicker">Ingénieur Robotique & Industrie · ESILV / EMLV</div>
+      <h1 class="glow">Je conçois, intègre et fiabilise des systèmes et logiciels industriels.</h1>
+      <p class="lead">De l’Industrie 4.0 aux pipelines CI/CD sécurisés, en passant par la robotique et des solutions pilotées par la donnée. Objectif : livrer des systèmes sûrs, documentés et scalables.</p>
+      <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap">
+        <a class="button" href="professionnel.html">Voir l’expérience pro →</a>
+        <a class="button" href="universitaire.html">Voir les projets →</a>
+        <a class="button" href="contact.html">Me contacter →</a>
+      </div>
+    </div>
+    <aside class="hero-card reveal" aria-hidden="true">
+      <h3 style="margin-top:0">Points clés</h3>
+      <ul style="margin:10px 0 0 18px; line-height:1.7">
+        <li>Thales · HTTPS sécurisé + Jenkins & Artifactory</li>
+        <li>Thales · Supervision industrielle & déploiement Modbus</li>
+        <li>RobAFIS · Robots autonomes (4ᵉ place)</li>
+      </ul>
+    </aside>
+  </section>
+
+  <section class="tiles">
+    <a class="card tile reveal" href="professionnel.html">
+      <span class="badge">Pro</span>
+      <h3>Expérience</h3>
+      <p>Stages et missions avec impact concret.</p>
+    </a>
+    <a class="card tile reveal" href="universitaire.html">
+      <span class="badge">Uni</span>
+      <h3>Projets</h3>
+      <p>Robotique, CI/CD, ROS2, Unity, data & PLM.</p>
+    </a>
+    <a class="card tile reveal" href="contact.html">
+      <span class="badge">Contact</span>
+      <h3>Coordonnées</h3>
+      <p>Email, LinkedIn, GitHub — et CV à télécharger.</p>
+    </a>
+  </section>
+
+  <footer>© <span id="y"></span> Heddy Yamine Kasko — Conçu pour recruteurs & managers</footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <script src="../assets/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Heddy Yamine Kasko · Portfolio (EN)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css" />
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <header class="nav">
+    <div class="brand"><span class="dot"></span> Yamine · Portfolio</div>
+    <nav class="menu">
+      <a href="../fr/">FR</a>
+      <a href="professional.html">Professional</a>
+      <a href="academic.html">Academic</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="reveal">
+      <div class="kicker">Robotics & Industry Engineer · ESILV / EMLV</div>
+      <h1 class="glow">I design, build and integrate robust industrial software & systems.</h1>
+      <p class="lead">From Industry 4.0 and secure CI/CD pipelines to robotics and data-driven solutions. Currently focused on delivering reliable, secure and well-documented systems that scale.</p>
+      <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap">
+        <a class="button" href="professional.html">View Professional Experience →</a>
+        <a class="button" href="academic.html">View Academic Projects →</a>
+        <a class="button" href="contact.html">Get in touch →</a>
+      </div>
+    </div>
+    <aside class="hero-card reveal" aria-hidden="true">
+      <h3 style="margin-top:0">Highlights</h3>
+      <ul style="margin:10px 0 0 18px; line-height:1.7">
+        <li>Thales · Secure HTTPS pipeline on Artifactory + Jenkins</li>
+        <li>Thales · Industrial supervision & Modbus deployment</li>
+        <li>RobAFIS · Autonomous robots (4th place)</li>
+      </ul>
+    </aside>
+  </section>
+
+  <section class="tiles">
+    <a class="card tile reveal" href="professional.html">
+      <span class="badge">Professional</span>
+      <h3>Experience</h3>
+      <p>Internships and roles where I delivered real-world impact.</p>
+    </a>
+    <a class="card tile reveal" href="academic.html">
+      <span class="badge">Academic</span>
+      <h3>Projects</h3>
+      <p>Robotics, CI/CD, ROS2, Unity, data & PLM selections.</p>
+    </a>
+    <a class="card tile reveal" href="contact.html">
+      <span class="badge">Contact</span>
+      <h3>Reach me</h3>
+      <p>Email, LinkedIn, GitHub — plus a downloadable CV.</p>
+    </a>
+  </section>
+
+  <footer>© <span id="y"></span> Heddy Yamine Kasko — Built for recruiters & hiring managers</footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <script src="../assets/script.js"></script>
+</body>
+</html>
