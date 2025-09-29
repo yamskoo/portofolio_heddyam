@@ -38,10 +38,52 @@
   a{color:inherit}
   
   /* Typography */
-  h1{font-size:clamp(28px,7vw,36px); margin:0 0 12px}
+  /* Typography */
+  h1{
+    font-size: clamp(34px, 7.2vw, 64px);
+    line-height: 1.08;
+    letter-spacing: -0.3px;
+    margin: 0 0 12px;
+  }
   h2{font-size:clamp(22px,5vw,28px); margin:0 0 8px}
   p{line-height:1.6}
   .subtitle{margin:0 0 28px; color:var(--muted)}
+  
+  /* === Emphasis utilities (underline / highlight) === */
+  strong{
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 0 12px rgba(124,58,237,.18);
+  }
+
+  /* Thick accent underline matching theme */
+  .u-accent{
+    text-decoration-line: underline;
+    text-decoration-color: rgba(124,58,237,.85);
+    text-decoration-thickness: .22em;
+    text-underline-offset: .18em;
+    text-decoration-skip-ink: none;
+  }
+
+  /* Gradient marker-style highlight */
+  .mark{
+    background-image: linear-gradient(120deg,
+      rgba(124,58,237,.30), rgba(37,99,235,.30));
+    background-size: 100% 42%;
+    background-position: 0 88%;
+    background-repeat: no-repeat;
+    border-radius: 6px;
+    padding: 0 .06em;
+  }
+
+  /* Underline + subtle glow */
+  .u-glow{
+    text-decoration: underline;
+    text-decoration-thickness: .2em;
+    text-underline-offset: .2em;
+    text-decoration-color: rgba(37,99,235,.85);
+    text-shadow: 0 4px 22px rgba(37,99,235,.35);
+  }
   
   /* Cards & grids */
   .card{
@@ -150,7 +192,7 @@
     .menu{position:static; display:flex; flex-direction:row; background:transparent; border:none; padding:0; box-shadow:none}
     .hamburger{display:none}
     .hero{grid-template-columns:1.2fr .8fr; padding:56px 28px 18px}
-    h1{font-size:clamp(32px,4.5vw,48px)}
+    h1{font-size: clamp(44px, 4.5vw, 72px);}  /* bigger on desktop */
     .tiles{grid-template-columns:repeat(2,1fr); gap:18px; padding:28px}
   }
   
