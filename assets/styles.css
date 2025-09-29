@@ -175,7 +175,21 @@
   .tiles{display:grid; grid-template-columns:1fr; gap:16px; padding:20px}
   .tile{position:relative; overflow:hidden}
   .tile h3{margin:0 0 8px}
-  .badge{display:inline-block; padding:6px 10px; font-size:12px; border-radius:999px; background:linear-gradient(45deg,var(--accent),var(--accent-2)); box-shadow:0 6px 16px rgba(124,58,237,.35)}
+  .badge{
+    display:inline-flex;               /* se cale sur le contenu */
+    align-items:center;
+    align-self:flex-start;             /* évite tout étirement dans la carte */
+    height:28px;                       /* hauteur stable du pill */
+    padding:0 10px;                    /* largeur = texte + padding */
+    font-size:15px;
+    line-height:1;
+    white-space:nowrap;                /* ne coupe pas sur 2 lignes */
+    width:fit-content;                 /* 🔥 largeur auto selon le mot */
+    max-width:100%;
+    border-radius:999px;
+    background:linear-gradient(45deg,var(--accent),var(--accent-2));
+    box-shadow:0 6px 16px rgba(124,58,237,.35);
+  } 
   .tile::after{ 
     content:""; position:absolute; inset:-20% -40% auto auto;
     height:160px; width:160px;
