@@ -40,7 +40,7 @@
   /* Typography */
   /* Typography */
   h1{
-    font-size: clamp(28px, 7.2vw, 36px);
+    font-size: clamp(28px, 7vw, 36px);
     line-height: 1.08;
     letter-spacing: -0.3px;
     margin: 0 0 12px;
