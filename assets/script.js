@@ -4,7 +4,6 @@
 
 // Reveal on scroll (Intersection Observer)
   (function(){
-    document.documentElement.classList.remove('no-js');
     const els = document.querySelectorAll('.reveal');
     if(!('IntersectionObserver' in window) || !els.length) return;
     const io = new IntersectionObserver((entries)=>{
