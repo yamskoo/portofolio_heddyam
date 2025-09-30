@@ -286,6 +286,40 @@
     border:1px solid rgba(255,255,255,.08);
     box-shadow: var(--shadow);
   }
+  /* Inversion d'ordre (mobile & desktop) */
+  .about-grid.flip .content { order: 1; }
+  .about-grid.flip .media   { order: 2; }
+
+  /* Cadre commun plus compact */
+  .media .frame{
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+    width:100%;
+    max-width: 560px;                 /* limite largeur */
+    margin-inline:auto;
+  }
+
+  /* Ratios utilitaires (tu appliques une de ces classes à .frame) */
+  .ar-square   { aspect-ratio: 1 / 1;   }
+  .ar-land     { aspect-ratio: 16 / 9;  }
+  .ar-port     { aspect-ratio: 3 / 4;   }
+  .ar-tall     { aspect-ratio: 9 / 16;  }
+
+  /* L’image remplit le cadre, moins haute qu’avant = plus compact */
+  .media .frame img{
+    width:100%; height:100%;
+    object-fit: cover;
+    display:block;
+    filter:saturate(108%);
+  }
+
+  /* Option dynamique: masque organique (“blob”) pour varier sans changer la photo */
+  .blob {
+    clip-path: path("M0.74,0.54 C0.64,0.86 0.37,1 0.15,0.86 -0.06,0.72 0.01,0.38 0.17,0.17 0.33,-0.05 0.67,-0.07 0.83,0.12 0.99,0.32 0.84,0.23 0.74,0.54 Z");
+  }
+
   .about-section .max{ max-width:900px; margin:0 auto }
 
   /* galerie horizontale */
@@ -300,6 +334,16 @@
     border:1px solid rgba(255,255,255,.08);
   }
 
+  .media .frame { transition: transform .4s ease; }
+  .media .frame:hover { transform: translateY(-2px) scale(1.01); }
+
+  /* Sur desktop, garde 2 colonnes mais avec contenu à gauche, image à droite */
+  @media (min-width:760px){
+    .about-grid.flip{
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
   /* Desktop enhancements */
   @media (min-width:760px){
     .about-hero{
