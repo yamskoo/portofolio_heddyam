@@ -55,4 +55,22 @@
       }catch(e){}
     });
   })();
+
+  // Parallax léger pour les éléments décoratifs / médias (data-speed)
+  (function(){
+    const els = document.querySelectorAll('.parallax');
+    if(!els.length) return;
+    const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+    const onScroll = () => {
+      const y = window.scrollY || window.pageYOffset;
+      els.forEach(el=>{
+        const sp = parseFloat(el.dataset.speed || '0.1');
+        const t = clamp(y * sp, -120, 120);
+        el.style.transform = `translateY(${t}px)`;
+      });
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, {passive:true});
+  })();
+  
   

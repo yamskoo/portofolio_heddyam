@@ -239,7 +239,78 @@
     *{scroll-behavior:auto !important}
     .reveal{transition:none}
   }
-  
+  /* ===== ABOUT (Qui suis-je) ===== */
+  .about-hero{
+    position:relative;
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:24px;
+    padding:38px 20px 10px;
+  }
+  .about-hero__text .button{ align-self:flex-start }
+
+  .about-hero__media{
+    display:flex; justify-content:center; align-items:center;
+    padding:10px;
+  }
+  .photo-ring{
+    position:relative; width:min(70vw, 360px); aspect-ratio:1/1;
+    border-radius:50%;
+    padding:8px;
+    background:linear-gradient(135deg, rgba(124,58,237,.6), rgba(37,99,235,.6));
+    box-shadow:0 10px 40px rgba(0,0,0,.5);
+  }
+  .photo-ring img{
+    width:100%; height:100%; object-fit:cover; border-radius:50%;
+    display:block; filter:saturate(108%);
+  }
+
+  /* petits “dessins” de fond (ornements) */
+  .ornament{
+    position:absolute; pointer-events:none; z-index:-1;
+    width:300px; height:300px; border-radius:32px;
+    background: radial-gradient(closest-side, rgba(124,58,237,.28), transparent 70%);
+    filter: blur(8px);
+  }
+  .ornament.o1{ top:-40px; left:-60px }
+  .ornament.o2{ bottom:-60px; right:-40px }
+
+  /* sections alternées texte/image */
+  .about-section{ padding:28px 20px }
+  .about-grid{
+    display:grid; gap:18px; align-items:center;
+    grid-template-columns: 1fr;
+  }
+  .about-grid .media img{
+    width:100%; border-radius:18px; display:block;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow: var(--shadow);
+  }
+  .about-section .max{ max-width:900px; margin:0 auto }
+
+  /* galerie horizontale */
+  .about-gallery{
+    display:grid; grid-auto-flow:column; grid-auto-columns: minmax(200px, 1fr);
+    gap:12px; overflow-x:auto; padding:12px 20px 4px;
+    scroll-snap-type:x mandatory;
+  }
+  .about-gallery figure{ margin:0; scroll-snap-align:start }
+  .about-gallery img{
+    display:block; width:100%; height:180px; object-fit:cover; border-radius:16px;
+    border:1px solid rgba(255,255,255,.08);
+  }
+
+  /* Desktop enhancements */
+  @media (min-width:760px){
+    .about-hero{
+      grid-template-columns: 1.1fr .9fr;
+      align-items:center; gap:28px;
+      padding:56px 28px 10px;
+    }
+    .about-section{ padding:42px 28px }
+    .about-grid{ grid-template-columns: 1fr 1fr; gap:24px }
+    .about-gallery img{ height:220px }
+  }
   /* ====== Breakpoints: enhance for larger screens ====== */
   @media (min-width:760px){
     .menu{position:static; display:flex; flex-direction:row; background:transparent; border:none; padding:0; box-shadow:none}
@@ -258,7 +329,7 @@
   @media (min-width:1100px){
     .tiles{grid-template-columns:repeat(3,1fr)}
   }
-  
+
   @media (max-width:380px){
     .badge{ height:24px; padding:0 8px; font-size:11px; }
   }
