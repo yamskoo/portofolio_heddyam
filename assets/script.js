@@ -3,7 +3,7 @@
    =============================== */
 
 // Reveal on scroll (Intersection Observer)
-(function(){
+  (function(){
     const els = document.querySelectorAll('.reveal');
     if(!('IntersectionObserver' in window) || !els.length) return;
     const io = new IntersectionObserver((entries)=>{
