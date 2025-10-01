@@ -72,5 +72,17 @@
     onScroll();
     window.addEventListener('scroll', onScroll, {passive:true});
   })();
+  // Centrer la galerie horizontale sur la 2e image
+  (function () {
+    const g = document.querySelector('.about-gallery');
+    if (!g) return;
+    const items = g.querySelectorAll('figure');
+    if (items.length < 2) return;
+  
+    // calcule le scroll pour centrer l'item[1]
+    const target = items[1].offsetLeft + items[1].offsetWidth / 2 - g.clientWidth / 2;
+    g.scrollLeft = Math.max(0, target); // positionne sans animation
+  })();
+  
   
   
