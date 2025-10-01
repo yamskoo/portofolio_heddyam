@@ -2,17 +2,16 @@
    Yamine Portfolio — script.js
    =============================== */
 
-  // Reveal on scroll (Intersection Observer)
+  // Reveal on scroll (Intersection Observer) — n'anime pas les sections cibles d'ancres
   (function(){
     const els = document.querySelectorAll('.reveal');
     if (!els.length) return;
-
-    // Si pas d’IO, on affiche tout (fallback)
+  
     if (!('IntersectionObserver' in window)) {
       els.forEach(el => el.classList.add('in'));
       return;
     }
-
+  
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -21,14 +20,14 @@
         }
       });
     }, { threshold: .12 });
-
+  
     els.forEach(el => {
-        // ⚠️ Ne pas animer les éléments qui servent de cible d'ancre (ont un id)
-        if (el.id) {
-          el.classList.add('in');   // déjà visible → pas de translateY à retirer plus tard
-          return;                   // on n'observe pas ces éléments
-        }
-        io.observe(el);
+      // Si l'élément a un id (cible d'ancre), on l'affiche directement -> pas de translateY qui “saute”
+      if (el.id) {
+        el.classList.add('in');
+        return;
+      }
+      io.observe(el);
     });
   })();
   
@@ -43,68 +42,7 @@
     set();
     window.addEventListener('resize', set);
   })();
-  
-  // Smooth scroll ultra fluide avec easing + durée selon la distance
-  (function () {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const header = document.querySelector('.nav');
-    const getOffset = () => (header ? header.getBoundingClientRect().height : 0) + 12;
-  
-    // easeInOutCubic
-    const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-  
-    const animateScroll = (to, duration = 500) => {
-      const start = window.pageYOffset;
-      const diff = to - start;
-      if (diff === 0) return;
-  
-      let startTime = null;
-      const step = (ts) => {
-        if (!startTime) startTime = ts;
-        const t = Math.min(1, (ts - startTime) / duration);
-        window.scrollTo(0, start + diff * ease(t));
-        if (t < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    };
-  
-    document.addEventListener('click', (e) => {
-      const a = e.target.closest('a[href^="#"]');
-      if (!a) return;
-  
-      const hash = a.getAttribute('href');
-      if (!hash || hash === '#') return;
-  
-      const target = document.getElementById(hash.slice(1));
-      if (!target) return;
-  
-      e.preventDefault();
-  
-      const y = target.getBoundingClientRect().top + window.pageYOffset - getOffset();
-  
-      if (prefersReduced) {
-        window.scrollTo(0, y);
-      } else {
-        // durée proportionnelle à la distance, bornée
-        const dist = Math.abs(y - window.pageYOffset);
-        const dur = Math.max(280, Math.min(900, dist * 0.6));
-        animateScroll(y, dur);
-      }
-  
-      // met à jour l'URL sans re-saut
-      if (history.pushState) history.pushState(null, '', hash);
-  
-      // ferme le menu mobile si besoin
-      const menu = document.getElementById('main-menu');
-      if (menu && menu.classList.contains('open')) {
-        menu.classList.remove('open');
-        const btn = document.querySelector('.hamburger');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-      }
-    });
-  })();
-  
-
+   
   // Mobile menu toggle (hamburger)
   (function(){
     const btn = document.querySelector('.hamburger');
