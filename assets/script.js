@@ -2,7 +2,7 @@
    Yamine Portfolio — script.js
    =============================== */
 
-// Reveal on scroll (Intersection Observer)
+  // Reveal on scroll (Intersection Observer)
   (function(){
     const els = document.querySelectorAll('.reveal');
     if(!('IntersectionObserver' in window) || !els.length) return;
@@ -17,15 +17,30 @@
     els.forEach(el=>io.observe(el));
   })();
   
-  // Smooth scroll for internal anchors
-  (function(){
-    document.addEventListener('click', (e)=>{
+  // Smooth scroll avec compensation du header sticky (+ ferme le menu mobile)
+  (function () {
+    document.addEventListener('click', (e) => {
       const a = e.target.closest('a[href^="#"]');
-      if(!a) return;
-      const el = document.querySelector(a.getAttribute('href'));
-      if(el){
-        e.preventDefault();
-        el.scrollIntoView({behavior:'smooth', block:'start'});
+      if (!a) return;
+  
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+  
+      e.preventDefault();
+  
+      // hauteur du header + petite marge
+      const header = document.querySelector('.nav');
+      const offset = (header ? header.getBoundingClientRect().height : 0) + 12;
+  
+      const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+  
+      // ferme le menu mobile si ouvert
+      const menu = document.getElementById('main-menu');
+      if (menu && menu.classList.contains('open')) {
+        menu.classList.remove('open');
+        const btn = document.querySelector('.hamburger');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
       }
     });
   })();
