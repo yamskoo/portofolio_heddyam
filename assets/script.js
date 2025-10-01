@@ -73,8 +73,8 @@
     window.addEventListener('scroll', onScroll, {passive:true});
   })();
   
-// Contrôles galerie (flèches + hint)
- (function(){
+  // Contrôles galerie (flèches + hint)
+  (function(){
     const g = document.querySelector('.about-gallery');
     const left = document.querySelector('.g-nav.left');
     const right = document.querySelector('.g-nav.right');
@@ -105,5 +105,85 @@
       if (moved >= 20) hint.style.display = 'none';
     }, {passive:true});
   })();
+  // ---- Autoplay horizontal pour la galerie (pause on user interaction) ----
+  (function autoplayGallery(){
+    const g = document.querySelector('.about-gallery');
+    if (!g) return;
+  
+    // Respecte les préférences d’accessibilité
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+  
+    // ⚙️ Réglages
+    const PX_PER_MS   = 0.12;   // vitesse (px par milliseconde)  -> ex: 0.12 = ~120px/s
+    const RESUME_MS   = 2500;   // délai avant reprise après interaction
+    const CLONE_COUNT = 2;      // nb d’items clonés en fin pour boucle fluide
+  
+    // Clone les premiers éléments pour une boucle sans “saut”
+    const originalWidthBefore = g.scrollWidth;
+    const children = Array.from(g.children);
+    const toClone  = children.slice(0, Math.min(CLONE_COUNT, children.length));
+    toClone.forEach(n => g.appendChild(n.cloneNode(true)));
+  
+    let raf = null, lastTs = 0, isAuto = true, resumeTimer = null;
+  
+    function maxLoopThreshold(){ 
+      // Quand on dépasse la largeur initiale, on recule d’un tour
+      return originalWidthBefore;
+    }
+  
+    function tick(ts){
+      if (!isAuto) { raf = null; return; }
+      if (!lastTs) lastTs = ts;
+      const dt = ts - lastTs; lastTs = ts;
+  
+      g.scrollLeft += PX_PER_MS * dt;
+  
+      // Boucle fluide
+      if (g.scrollLeft >= maxLoopThreshold() - 1) {
+        g.scrollLeft -= maxLoopThreshold();
+      }
+      raf = requestAnimationFrame(tick);
+    }
+  
+    function start(){
+      if (raf || !isAuto) return;
+      lastTs = 0;
+      raf = requestAnimationFrame(tick);
+    }
+  
+    function stop(){
+      isAuto = false;
+      if (raf) cancelAnimationFrame(raf);
+      raf = null;
+    }
+  
+    function pauseAndMaybeResume(){
+      // Pause immédiate et planifie la reprise après inactivité
+      isAuto = false;
+      if (raf) cancelAnimationFrame(raf);
+      raf = null;
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => { isAuto = true; start(); }, RESUME_MS);
+    }
+  
+    // Événements qui interrompent l’autoplay
+    const pauseEventsTargeted = ['pointerdown','touchstart','wheel','keydown','pointermove','touchmove'];
+    pauseEventsTargeted.forEach(ev => g.addEventListener(ev, pauseAndMaybeResume, {passive:true}));
+  
+    // Les flèches manuelles mettent aussi en pause
+    document.querySelectorAll('.g-nav').forEach(btn => {
+      btn.addEventListener('click', pauseAndMaybeResume);
+    });
+  
+    // Visibilité onglet
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop(); else { isAuto = true; start(); }
+    });
+  
+    // Démarre
+    start();
+  })();
+  
   
   
