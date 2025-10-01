@@ -73,11 +73,12 @@
     window.addEventListener('scroll', onScroll, {passive:true});
   })();
   
-  // Flèches gauche/droite
-  (function(){
+// Contrôles galerie (flèches + hint)
+ (function(){
     const g = document.querySelector('.about-gallery');
     const left = document.querySelector('.g-nav.left');
     const right = document.querySelector('.g-nav.right');
+    const hint = document.querySelector('.gallery-hint');
     if(!g || !left || !right) return;
   
     const step = () => {
@@ -95,12 +96,14 @@
     update();
     g.addEventListener('scroll', update, {passive:true});
   
-    // cacher le hint après une première interaction
-    const hint = document.querySelector('.gallery-hint');
-    const hideHint = () => { if(hint) hint.style.display = 'none'; };
-    g.addEventListener('wheel', hideHint, {passive:true});
-    g.addEventListener('touchstart', hideHint, {passive:true});
-    left.addEventListener('click', hideHint);
-    right.addEventListener('click', hideHint);
+    // Cache le hint uniquement après un VRAI scroll (≥ 20px)
+    let last = g.scrollLeft;
+    g.addEventListener('scroll', () => {
+      if (!hint) return;
+      const moved = Math.abs(g.scrollLeft - last);
+      last = g.scrollLeft;
+      if (moved >= 20) hint.style.display = 'none';
+    }, {passive:true});
   })();
+  
   

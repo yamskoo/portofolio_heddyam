@@ -412,14 +412,31 @@
   .gallery-hint .chev:first-child{ animation-direction:reverse; }
   @keyframes nudge{ 0%,100%{transform:translateX(0);opacity:.7} 50%{transform:translateX(6px);opacity:1} }
 
-  /* Option: n’afficher les flèches qu’au survol desktop */
+  /* Desktop: apparition au survol */
   @media (hover:hover){
     .g-nav{ opacity:0; transition:opacity .2s ease; }
     .gallery-wrap:hover .g-nav{ opacity:1; }
   }
 
-  /* Petits écrans: masquer les flèches si tu préfères */
-  @media (max-width:420px){ .g-nav{ display:none; } }
+  /* Mobile/tactile: flèches toujours visibles, un peu plus grandes et cliquables */
+  @media (hover:none){
+    .g-nav{
+      opacity:0.95;
+      width:44px; height:44px;        /* + confort tactile */
+      font-size:24px;
+    }
+  }
+
+  /* Assure que l’animation du hint tourne aussi sur mobile */
+  .gallery-hint .chev{
+    display:inline-block;
+    animation:nudge 1.2s ease-in-out infinite;
+  }
+  @keyframes nudge{
+    0%,100% { transform: translateX(0); opacity:.7; }
+    50%     { transform: translateX(6px); opacity:1; }
+  }
+
 
     
   
