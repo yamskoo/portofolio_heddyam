@@ -72,17 +72,35 @@
     onScroll();
     window.addEventListener('scroll', onScroll, {passive:true});
   })();
-  // Centrer la galerie horizontale sur la 2e image
-  (function () {
+  
+  // Flèches gauche/droite
+  (function(){
     const g = document.querySelector('.about-gallery');
-    if (!g) return;
-    const items = g.querySelectorAll('figure');
-    if (items.length < 2) return;
+    const left = document.querySelector('.g-nav.left');
+    const right = document.querySelector('.g-nav.right');
+    if(!g || !left || !right) return;
   
-    // calcule le scroll pour centrer l'item[1]
-    const target = items[1].offsetLeft + items[1].offsetWidth / 2 - g.clientWidth / 2;
-    g.scrollLeft = Math.max(0, target); // positionne sans animation
+    const step = () => {
+      const card = g.querySelector('figure');
+      return card ? (card.offsetWidth + 12) : (g.clientWidth * 0.9);
+    };
+  
+    left.addEventListener('click', ()=> g.scrollBy({left: -step(), behavior:'smooth'}));
+    right.addEventListener('click',()=> g.scrollBy({left:  step(), behavior:'smooth'}));
+  
+    const update = () => {
+      left.disabled  = g.scrollLeft <= 2;
+      right.disabled = g.scrollLeft + g.clientWidth >= g.scrollWidth - 2;
+    };
+    update();
+    g.addEventListener('scroll', update, {passive:true});
+  
+    // cacher le hint après une première interaction
+    const hint = document.querySelector('.gallery-hint');
+    const hideHint = () => { if(hint) hint.style.display = 'none'; };
+    g.addEventListener('wheel', hideHint, {passive:true});
+    g.addEventListener('touchstart', hideHint, {passive:true});
+    left.addEventListener('click', hideHint);
+    right.addEventListener('click', hideHint);
   })();
-  
-  
   

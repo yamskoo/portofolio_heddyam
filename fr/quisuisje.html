@@ -143,15 +143,25 @@
     </div>
   </section>
 
-  <!-- GALLERY STRIP -->
-  <section class="about-gallery" aria-label="Quelques images">
-    <figure><img src="../photo/velo.jpg" alt="Moment 1" loading="eager"></figure>
-    <figure><img src="../photo/madeira.jpg" alt="Moment 2" loading="eager"></figure>
-    <figure><img src="../photo/foot.jpg" alt="Moment 3" loading="eager"></figure>
-    <figure><img src="../photo/rando-reunion.jpg" alt="Moment 4" loading="eager"></figure>
-    <figure><img src="../photo/fujimoi.JPEG" alt="Moment 4" loading="eager"></figure>
-    <figure><img src="../photo/fujiparis.JPEG" alt="Moment 4" loading="eager"></figure>
+    <!-- GALLERY STRIP -->
+  <section class="gallery-wrap">
+    <div class="about-gallery" aria-label="Quelques images">
+      <figure><img src="../photo/velo.jpg"           alt="Moment 1" loading="eager" decoding="async"></figure>
+      <figure><img src="../photo/madeira.jpg"        alt="Moment 2" loading="eager" decoding="async"></figure>
+      <figure><img src="../photo/foot.jpg"           alt="Moment 3" loading="eager"  decoding="async"></figure>
+      <figure><img src="../photo/rando-reunion.jpg"  alt="Moment 4" loading="eager"  decoding="async"></figure>
+      <figure><img src="../photo/fujimoi.JPEG"       alt="Moment 5" loading="eager"  decoding="async"></figure>
+      <figure><img src="../photo/fujiparis.JPEG"     alt="Moment 6" loading="eager"  decoding="async"></figure>
+    </div>
+  
+    <!-- Flèches -->
+    <button class="g-nav left"  aria-label="Défiler vers la gauche">‹</button>
+    <button class="g-nav right" aria-label="Défiler vers la droite">›</button>
+  
+    <!-- Indication -->
+    <div class="gallery-hint"><span class="chev">‹</span> Glissez pour voir <span class="chev">›</span></div>
   </section>
+  
 
   <footer>© <span id="y"></span> Yamine Kasko — Page “Qui suis-je”</footer>
 
