@@ -33,6 +33,27 @@
 
   (function () {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const header = document.querySelector('.nav');
+    const getOffset = () => (header ? header.getBoundingClientRect().height : 0) + 12;
+  
+    // easing douce
+    const ease = (t) => (t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2);
+  
+    const animateTo = (toY, duration = 600) => {
+      const startY = window.pageYOffset || document.documentElement.scrollTop || 0;
+      const diff = toY - startY;
+      if (Math.abs(diff) < 1) return;
+  
+      let start;
+      const step = (ts) => {
+        if (!start) start = ts;
+        const t = Math.min(1, (ts - start) / duration);
+        const y = startY + diff * ease(t);
+        window.scrollTo(0, y);
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
   
     document.addEventListener('click', (e) => {
       const a = e.target.closest('a[href^="#"]');
@@ -46,26 +67,30 @@
   
       e.preventDefault();
   
-      // grâce à ton CSS: .about-section[id]{scroll-margin-top: calc(var(--nav-h) + 12px);}
-      // l'offset du header sticky est déjà géré
-      target.scrollIntoView({
-        behavior: prefersReduced ? 'auto' : 'smooth',
-        block: 'start',
-        inline: 'nearest'
-      });
-  
-      // met à jour l’URL proprement
-      if (history.pushState) history.pushState(null, '', hash);
-  
-      // ferme le menu mobile si ouvert
+      // Ferme d'abord le menu mobile (important pour iOS)
       const menu = document.getElementById('main-menu');
       if (menu && menu.classList.contains('open')) {
         menu.classList.remove('open');
         const btn = document.querySelector('.hamburger');
         if (btn) btn.setAttribute('aria-expanded', 'false');
       }
-    });
-  })(); 
+  
+      // Calcule la position en tenant compte du header sticky
+      const y = target.getBoundingClientRect().top + (window.pageYOffset || 0) - getOffset();
+  
+      if (prefersReduced) {
+        window.scrollTo(0, y);
+      } else {
+        // durée proportionnelle à la distance
+        const dist = Math.abs(y - (window.pageYOffset || 0));
+        const dur = Math.max(300, Math.min(900, dist * 0.6));
+        // Petit setTimeout = fiabilise iOS après fermeture du menu
+        setTimeout(() => animateTo(y, dur), 0);
+      }
+  
+      if (history.pushState) history.pushState(null, '', hash);
+    }, { passive: false });
+  })();
   
   // Expose la hauteur réelle du header sticky à CSS via --nav-h
   (function(){
