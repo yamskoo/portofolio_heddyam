@@ -30,26 +30,19 @@
   })();
   
 
-  // Smooth scroll AVEC COMPENSATION du header sticky (+ ferme le menu mobile)
+  // Smooth scroll (offset géré par CSS via scroll-margin-top) + ferme le menu mobile
   (function(){
     document.addEventListener('click', (e)=>{
       const a = e.target.closest('a[href^="#"]');
       if(!a) return;
   
-      const hash = a.getAttribute('href');
-      const target = document.querySelector(hash);
-      if(!target) return;
+      const el = document.querySelector(a.getAttribute('href'));
+      if(!el) return;
   
       e.preventDefault();
+      el.scrollIntoView({behavior:'smooth', block:'start'});
   
-      // hauteur du header sticky (+ petite marge)
-      const header = document.querySelector('.nav');
-      const offset = (header ? header.getBoundingClientRect().height : 0) + 12;
-  
-      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top, behavior:'smooth' });
-  
-      // ferme le menu mobile si ouvert
+      // Ferme le menu mobile si ouvert
       const menu = document.getElementById('main-menu');
       if (menu && menu.classList.contains('open')) {
         menu.classList.remove('open');
