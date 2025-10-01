@@ -30,24 +30,42 @@
   })();
   
 
-  // Smooth scroll AVEC COMPENSATION du header sticky (+ ferme le menu mobile)
-  (function(){
-    document.addEventListener('click', (e)=>{
-      const a = e.target.closest('a[href^="#"]');
-      if(!a) return;
+  // Smooth scroll avec offset du header (fallback si problème)
+  (function () {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   
-      const hash = a.getAttribute('href');
-      const target = document.querySelector(hash);
-      if(!target) return;
+    document.addEventListener('click', (e) => {
+      // on ne gère que les ancres locales
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+  
+      const hash = a.getAttribute('href');        // ex: "#racines"
+      if (!hash || hash === '#') return;          // ignore les "#" vides
+  
+      const id = hash.slice(1);                   // "racines"
+      const target = document.getElementById(id); // plus fiable que querySelector("#...")
+  
+      // si pas de cible => on laisse le navigateur gérer (pas de preventDefault)
+      if (!target) return;
   
       e.preventDefault();
   
-      // hauteur du header sticky (+ petite marge)
+      // calcule l'offset réel du header sticky (+ marge)
       const header = document.querySelector('.nav');
       const offset = (header ? header.getBoundingClientRect().height : 0) + 12;
   
+      // position à atteindre
       const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top, behavior:'smooth' });
+  
+      // scroll (instant si reduced motion)
+      window.scrollTo({ top, behavior: prefersReduced ? 'auto' : 'smooth' });
+  
+      // met à jour l'URL proprement
+      if (history.pushState) {
+        history.pushState(null, '', '#' + id);
+      } else {
+        location.hash = '#' + id;
+      }
   
       // ferme le menu mobile si ouvert
       const menu = document.getElementById('main-menu');
@@ -58,9 +76,7 @@
       }
     });
   })();
-  
-  
-  
+
   // Mobile menu toggle (hamburger)
   (function(){
     const btn = document.querySelector('.hamburger');
