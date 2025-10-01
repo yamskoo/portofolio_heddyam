@@ -442,9 +442,6 @@
     scroll-margin-top: calc(var(--nav-h) + 12px);
   }
 
-  .about-section[id]{
-    scroll-margin-top: calc(var(--nav-h) + 12px);
-  }
 
 
     
