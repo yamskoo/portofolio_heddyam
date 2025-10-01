@@ -30,6 +30,42 @@
       io.observe(el);
     });
   })();
+
+  (function () {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+  
+      const hash = a.getAttribute('href'); // ex: "#racines"
+      if (!hash || hash === '#') return;
+  
+      const target = document.querySelector(hash);
+      if (!target) return;
+  
+      e.preventDefault();
+  
+      // grâce à ton CSS: .about-section[id]{scroll-margin-top: calc(var(--nav-h) + 12px);}
+      // l'offset du header sticky est déjà géré
+      target.scrollIntoView({
+        behavior: prefersReduced ? 'auto' : 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      });
+  
+      // met à jour l’URL proprement
+      if (history.pushState) history.pushState(null, '', hash);
+  
+      // ferme le menu mobile si ouvert
+      const menu = document.getElementById('main-menu');
+      if (menu && menu.classList.contains('open')) {
+        menu.classList.remove('open');
+        const btn = document.querySelector('.hamburger');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })(); 
   
   // Expose la hauteur réelle du header sticky à CSS via --nav-h
   (function(){
@@ -119,9 +155,3 @@
         }, {passive:true});
       }
   })();
-
-  
-  
-  
-  
-  
