@@ -33,14 +33,25 @@
 
   (function () {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const root = document.scrollingElement || document.documentElement;
     const header = document.querySelector('.nav');
-    const getOffset = () => (header ? header.getBoundingClientRect().height : 0) + 12;
+  
+    const getOffset = () =>
+      (header ? header.getBoundingClientRect().height : 0) + 12;
+  
+    const getScrollTop = () =>
+      root.scrollTop || document.body.scrollTop || 0;
+  
+    const setScrollTop = (y) => {
+      root.scrollTop = y;            // standard
+      document.body.scrollTop = y;   // fallback Safari/iOS
+    };
   
     // easing douce
     const ease = (t) => (t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2);
   
-    const animateTo = (toY, duration = 600) => {
-      const startY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    const animateTo = (toY, duration) => {
+      const startY = getScrollTop();
       const diff = toY - startY;
       if (Math.abs(diff) < 1) return;
   
@@ -48,8 +59,7 @@
       const step = (ts) => {
         if (!start) start = ts;
         const t = Math.min(1, (ts - start) / duration);
-        const y = startY + diff * ease(t);
-        window.scrollTo(0, y);
+        setScrollTop(startY + diff * ease(t));
         if (t < 1) requestAnimationFrame(step);
       };
       requestAnimationFrame(step);
@@ -59,7 +69,7 @@
       const a = e.target.closest('a[href^="#"]');
       if (!a) return;
   
-      const hash = a.getAttribute('href'); // ex: "#racines"
+      const hash = a.getAttribute('href');   // ex: "#racines"
       if (!hash || hash === '#') return;
   
       const target = document.querySelector(hash);
@@ -67,7 +77,7 @@
   
       e.preventDefault();
   
-      // Ferme d'abord le menu mobile (important pour iOS)
+      // Ferme le menu mobile (important avant de mesurer l’offset)
       const menu = document.getElementById('main-menu');
       if (menu && menu.classList.contains('open')) {
         menu.classList.remove('open');
@@ -75,23 +85,29 @@
         if (btn) btn.setAttribute('aria-expanded', 'false');
       }
   
-      // Calcule la position en tenant compte du header sticky
-      const y = target.getBoundingClientRect().top + (window.pageYOffset || 0) - getOffset();
+      // Désactive temporairement tout smooth CSS pour éviter les conflits
+      const html = document.documentElement;
+      const prevBehavior = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto';
+  
+      const y = target.getBoundingClientRect().top + getScrollTop() - getOffset();
   
       if (prefersReduced) {
-        window.scrollTo(0, y);
+        setScrollTop(y);
       } else {
-        // durée proportionnelle à la distance
-        const dist = Math.abs(y - (window.pageYOffset || 0));
+        const dist = Math.abs(y - getScrollTop());
         const dur = Math.max(300, Math.min(900, dist * 0.6));
-        // Petit setTimeout = fiabilise iOS après fermeture du menu
+        // Petit délai = fiabilise iOS juste après fermeture du menu
         setTimeout(() => animateTo(y, dur), 0);
       }
   
       if (history.pushState) history.pushState(null, '', hash);
+  
+      // Restaure le comportement CSS
+      setTimeout(() => { html.style.scrollBehavior = prevBehavior || ''; }, 50);
     }, { passive: false });
   })();
-  
+
   // Expose la hauteur réelle du header sticky à CSS via --nav-h
   (function(){
     const nav = document.querySelector('.nav');

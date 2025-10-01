@@ -28,7 +28,7 @@
       radial-gradient(1000px 600px at 120% 10%, rgba(37,99,235,.22), transparent 55%),
       linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
   }
-  html { scroll-behavior: smooth; } 
+  
   html, body { 
     overflow-x: hidden; 
     -webkit-text-size-adjust: 100%; 
