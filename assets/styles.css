@@ -249,11 +249,21 @@
     gap:24px;
     padding:38px 20px 10px;
   }
-  .about-hero__text .button{ align-self:flex-start }
-
+  .about-hero__text { 
+    position: relative; 
+    z-index: 3; 
+  }
+  .about-hero__text .button {
+    align-self:flex-start;
+    position: relative;
+    z-index: 4;
+    pointer-events: auto;
+  }
   .about-hero__media{
     display:flex; justify-content:center; align-items:center;
     padding:10px;
+    position: relative; 
+    z-index: 1; 
   }
   .photo-ring{
     position:relative; width:min(70vw, 360px); aspect-ratio:1/1;
@@ -323,6 +333,9 @@
   }
 
   .about-section .max{ max-width:900px; margin:0 auto }
+  .about-section[id]{
+    scroll-margin-top: calc(var(--nav-h) + 12px);
+  }
 
   /* galerie horizontale */
   .about-gallery{
@@ -439,10 +452,7 @@
     50%     { transform: translateX(6px); opacity:1; }
   }
 
-  .about-section[id]{
-    scroll-margin-top: calc(var(--nav-h) + 12px);
-  }
-
+  
 
 
     
