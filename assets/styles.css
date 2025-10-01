@@ -14,6 +14,7 @@
     --glass:rgba(255,255,255,.06);
     --radius:18px;
     --shadow: 0 10px 30px rgba(0,0,0,.35);
+    --nav-h: 60px;
   }
   
   *{box-sizing:border-box}
@@ -435,6 +436,14 @@
   @keyframes nudge{
     0%,100% { transform: translateX(0); opacity:.7; }
     50%     { transform: translateX(6px); opacity:1; }
+  }
+
+  .about-section[id]{
+    scroll-margin-top: calc(var(--nav-h) + 12px);
+  }
+
+  .about-section[id]{
+    scroll-margin-top: calc(var(--nav-h) + 12px);
   }
 
 

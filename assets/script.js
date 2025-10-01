@@ -17,25 +17,32 @@
     els.forEach(el=>io.observe(el));
   })();
   
-  // Smooth scroll avec compensation du header sticky (+ ferme le menu mobile)
-  (function () {
-    document.addEventListener('click', (e) => {
-      const a = e.target.closest('a[href^="#"]');
-      if (!a) return;
+  // Expose la hauteur réelle du header sticky à CSS via --nav-h
+  (function(){
+    const nav = document.querySelector('.nav');
+    if(!nav) return;
+    const set = () => {
+      const h = nav.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--nav-h', h + 'px');
+    };
+    set();
+    window.addEventListener('resize', set);
+  })();
   
-      const target = document.querySelector(a.getAttribute('href'));
-      if (!target) return;
+
+  // Smooth scroll (offset géré par CSS via scroll-margin-top) + ferme le menu mobile
+  (function(){
+    document.addEventListener('click', (e)=>{
+      const a = e.target.closest('a[href^="#"]');
+      if(!a) return;
+  
+      const el = document.querySelector(a.getAttribute('href'));
+      if(!el) return;
   
       e.preventDefault();
+      el.scrollIntoView({behavior:'smooth', block:'start'});
   
-      // hauteur du header + petite marge
-      const header = document.querySelector('.nav');
-      const offset = (header ? header.getBoundingClientRect().height : 0) + 12;
-  
-      const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-  
-      // ferme le menu mobile si ouvert
+      // Ferme le menu mobile si ouvert
       const menu = document.getElementById('main-menu');
       if (menu && menu.classList.contains('open')) {
         menu.classList.remove('open');
@@ -44,6 +51,7 @@
       }
     });
   })();
+  
   
   // Mobile menu toggle (hamburger)
   (function(){
