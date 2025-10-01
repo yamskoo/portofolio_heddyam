@@ -97,13 +97,14 @@
     g.addEventListener('scroll', update, {passive:true});
   
     // Cache le hint uniquement après un VRAI scroll (≥ 20px)
-    let last = g.scrollLeft;
-    g.addEventListener('scroll', () => {
-      if (!hint) return;
-      const moved = Math.abs(g.scrollLeft - last);
-      last = g.scrollLeft;
-      if (moved >= 20) hint.style.display = 'none';
-    }, {passive:true});
+    if (hint){
+        let last = g.scrollLeft;
+        g.addEventListener('scroll', () => {
+          const moved = Math.abs(g.scrollLeft - last);
+          last = g.scrollLeft;
+          if (moved >= 20) hint.style.display = 'none';
+        }, {passive:true});
+      }
   })();
 
   
