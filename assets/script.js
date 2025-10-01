@@ -5,16 +5,31 @@
   // Reveal on scroll (Intersection Observer)
   (function(){
     const els = document.querySelectorAll('.reveal');
-    if(!('IntersectionObserver' in window) || !els.length) return;
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
+    if (!els.length) return;
+
+    // Si pas d’IO, on affiche tout (fallback)
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(el => el.classList.add('in'));
+      return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
           e.target.classList.add('in');
           io.unobserve(e.target);
         }
       });
-    }, {threshold:.12});
-    els.forEach(el=>io.observe(el));
+    }, { threshold: .12 });
+
+    els.forEach(el => {
+        // ⚠️ Ne pas animer les éléments qui servent de cible d'ancre (ont un id)
+        if (el.id) {
+          el.classList.add('in');   // déjà visible → pas de translateY à retirer plus tard
+          return;                   // on n'observe pas ces éléments
+        }
+        io.observe(el);
+    });
   })();
   
   // Expose la hauteur réelle du header sticky à CSS via --nav-h
