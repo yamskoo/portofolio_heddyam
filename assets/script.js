@@ -30,53 +30,6 @@
   })();
   
 
-  // Smooth scroll avec offset du header (fallback si problème)
-  (function () {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  
-    document.addEventListener('click', (e) => {
-      // on ne gère que les ancres locales
-      const a = e.target.closest('a[href^="#"]');
-      if (!a) return;
-  
-      const hash = a.getAttribute('href');        // ex: "#racines"
-      if (!hash || hash === '#') return;          // ignore les "#" vides
-  
-      const id = hash.slice(1);                   // "racines"
-      const target = document.getElementById(id); // plus fiable que querySelector("#...")
-  
-      // si pas de cible => on laisse le navigateur gérer (pas de preventDefault)
-      if (!target) return;
-  
-      e.preventDefault();
-  
-      // calcule l'offset réel du header sticky (+ marge)
-      const header = document.querySelector('.nav');
-      const offset = (header ? header.getBoundingClientRect().height : 0) + 12;
-  
-      // position à atteindre
-      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-  
-      // scroll (instant si reduced motion)
-      window.scrollTo({ top, behavior: prefersReduced ? 'auto' : 'smooth' });
-  
-      // met à jour l'URL proprement
-      if (history.pushState) {
-        history.pushState(null, '', '#' + id);
-      } else {
-        location.hash = '#' + id;
-      }
-  
-      // ferme le menu mobile si ouvert
-      const menu = document.getElementById('main-menu');
-      if (menu && menu.classList.contains('open')) {
-        menu.classList.remove('open');
-        const btn = document.querySelector('.hamburger');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-      }
-    });
-  })();
-
   // Mobile menu toggle (hamburger)
   (function(){
     const btn = document.querySelector('.hamburger');
