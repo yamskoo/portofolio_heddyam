@@ -105,85 +105,103 @@
       if (moved >= 20) hint.style.display = 'none';
     }, {passive:true});
   })();
-  // ---- Autoplay horizontal pour la galerie (pause on user interaction) ----
+
+  // ---- Autoplay horizontal pour la galerie (mobile-friendly) ----
   (function autoplayGallery(){
     const g = document.querySelector('.about-gallery');
     if (!g) return;
   
-    // Respecte les préférences d’accessibilité
+    // Respecte l’accessibilité
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) return;
   
     // ⚙️ Réglages
-    const PX_PER_MS   = 0.12;   // vitesse (px par milliseconde)  -> ex: 0.12 = ~120px/s
-    const RESUME_MS   = 2500;   // délai avant reprise après interaction
-    const CLONE_COUNT = 2;      // nb d’items clonés en fin pour boucle fluide
+    const PX_PER_TICK = 1.2;       // vitesse ~ px par tick
+    const TICK_MS     = 16;        // ~60fps
+    const RESUME_MS   = 2500;      // reprise après inactivité
+    const CLONE_COUNT = 2;         // éléments clonés pour boucle lisse
   
-    // Clone les premiers éléments pour une boucle sans “saut”
+    // Clone quelques items pour une boucle sans “saut”
     const originalWidthBefore = g.scrollWidth;
-    const children = Array.from(g.children);
-    const toClone  = children.slice(0, Math.min(CLONE_COUNT, children.length));
-    toClone.forEach(n => g.appendChild(n.cloneNode(true)));
+    Array.from(g.children).slice(0, Math.min(CLONE_COUNT, g.children.length))
+      .forEach(n => g.appendChild(n.cloneNode(true)));
   
-    let raf = null, lastTs = 0, isAuto = true, resumeTimer = null;
+    let timer = null;
+    let raf   = null;
+    let isAuto = true;
+    let interacting = false;   // 👈 ne pause que si vrai
+    let resumeTimer = null;
   
-    function maxLoopThreshold(){ 
-      // Quand on dépasse la largeur initiale, on recule d’un tour
-      return originalWidthBefore;
-    }
-  
-    function tick(ts){
-      if (!isAuto) { raf = null; return; }
-      if (!lastTs) lastTs = ts;
-      const dt = ts - lastTs; lastTs = ts;
-  
-      g.scrollLeft += PX_PER_MS * dt;
+    function loopStep(){
+      if (!isAuto || interacting) return;
+      g.scrollLeft += PX_PER_TICK;
   
       // Boucle fluide
-      if (g.scrollLeft >= maxLoopThreshold() - 1) {
-        g.scrollLeft -= maxLoopThreshold();
+      if (g.scrollLeft >= originalWidthBefore - 1) {
+        g.scrollLeft -= originalWidthBefore;
       }
-      raf = requestAnimationFrame(tick);
     }
   
     function start(){
-      if (raf || !isAuto) return;
-      lastTs = 0;
-      raf = requestAnimationFrame(tick);
+      if (timer) return;
+      // Intervalle “fiable” sur mobile
+      timer = setInterval(()=>{
+        // petit polissage via rAF quand dispo
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(loopStep);
+      }, TICK_MS);
     }
   
     function stop(){
-      isAuto = false;
-      if (raf) cancelAnimationFrame(raf);
-      raf = null;
+      if (timer){ clearInterval(timer); timer = null; }
+      if (raf){ cancelAnimationFrame(raf); raf = null; }
     }
   
-    function pauseAndMaybeResume(){
-      // Pause immédiate et planifie la reprise après inactivité
-      isAuto = false;
-      if (raf) cancelAnimationFrame(raf);
-      raf = null;
+    function pauseDuringInteraction(){
+      interacting = true;
       if (resumeTimer) clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(() => { isAuto = true; start(); }, RESUME_MS);
+    }
+    function maybeResumeAfter(){
+      // relâchement → planifie reprise
+      interacting = false;
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(()=>{ isAuto = true; }, RESUME_MS);
     }
   
-    // Événements qui interrompent l’autoplay
-    const pauseEventsTargeted = ['pointerdown','touchstart','wheel','keydown','pointermove','touchmove'];
-    pauseEventsTargeted.forEach(ev => g.addEventListener(ev, pauseAndMaybeResume, {passive:true}));
+    // 🖐️ Interaction utilisateur — pause seulement quand DOIGT EN CONTACT
+    g.addEventListener('pointerdown', pauseDuringInteraction, {passive:true});
+    g.addEventListener('pointerup',   maybeResumeAfter,       {passive:true});
+    g.addEventListener('pointercancel', maybeResumeAfter,     {passive:true});
+    g.addEventListener('touchstart',  pauseDuringInteraction, {passive:true});
+    g.addEventListener('touchend',    maybeResumeAfter,       {passive:true});
+    g.addEventListener('wheel',       ()=>{ isAuto=false; maybeResumeAfter(); }, {passive:true});
   
-    // Les flèches manuelles mettent aussi en pause
-    document.querySelectorAll('.g-nav').forEach(btn => {
-      btn.addEventListener('click', pauseAndMaybeResume);
+    // Les flèches mettent aussi en pause et déclenchent la reprise différée
+    document.querySelectorAll('.g-nav').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        isAuto = false;
+        maybeResumeAfter();
+      });
     });
   
-    // Visibilité onglet
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) stop(); else { isAuto = true; start(); }
+    // Pause quand onglet caché
+    document.addEventListener('visibilitychange', ()=>{
+      if (document.hidden) stop(); else start();
     });
   
-    // Démarre
+    // Pause quand la galerie n’est pas visible à l’écran (économie batterie)
+    let onScreen = true;
+    const io = ('IntersectionObserver' in window) ? new IntersectionObserver((entries)=>{
+      onScreen = entries[0].isIntersecting;
+      if (onScreen) start(); else stop();
+    }, {threshold: 0.1}) : null;
+    if (io) io.observe(g);
+  
+    // Démarrage
     start();
   })();
+  
+  
   
   
   
