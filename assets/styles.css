@@ -124,28 +124,19 @@
   
   /* Mobile menu collapsed by default */
   .menu{
-    display:flex; flex-direction:column; gap:10px;
+    display:none; flex-direction:column; gap:10px;
     position:fixed; left:12px; right:12px; top:60px;   /* <- key change */
     background:rgba(10,10,20,.97);
     border:1px solid rgba(255,255,255,.12);
     border-radius:14px; padding:12px; box-shadow:var(--shadow);
     z-index:30;
-    opacity: 0;    /* menu invisible par défaut */
-    transform: translateY(-10px); /* léger décalage vers le haut */
-    pointer-events: none;        /* désactive les interactions quand le menu est fermé */
-    transition: opacity 0.3s ease, transform 0.3s ease; /* transition fluide en 0.3s */
   }
-  
   .menu a{
     color:var(--text); text-decoration:none; opacity:.92;
     padding:10px 12px; border-radius:10px
   }
   .menu a:hover{opacity:1; background:rgba(255,255,255,.06)}
-  .menu.open {
-    opacity: 1;             /* le menu devient visible */
-    transform: translateY(0);  /* position normale (plus de décalage) */
-    pointer-events: auto;   /* réactive les interactions (liens cliquables) */
-  }
+  .menu.open{display:flex}
   .hamburger{
     margin-left:auto; /* pushes button to the right */
     display:inline-flex; align-items:center; justify-content:center;
