@@ -455,7 +455,11 @@
   }
 
   /* === Rail de timeline animé === */
-  /* === 1) RAIL : ne dépasse plus en haut/bas === */
+  /* =======================================================
+   RAIL + DOTS (alignés), pas de dépassement, spacing serré
+   ======================================================= */
+
+  /* variables pour tout tenir calé */
   .timeline--rail {
     --rail-x: 18px;          /* position horizontale du rail */
     --rail-top: 26px;        /* décalage haut du rail (évite le dépassement) */
@@ -466,44 +470,53 @@
     position: relative;
     padding-top: 8px;        /* un peu d’air au dessus */
   }
+
+  /* RAIL : ne dépasse plus grâce à inset + isolation */
   .timeline--rail::before{
     content:"";
-    position:absolute; 
-    left:18px;
-    top: 6px;                   /* <-- au lieu de top:0 (ne dépasse plus) */
-    bottom: 6px;                /* <-- coupe aussi avant le bas */
+    position:absolute;
+    inset: var(--rail-top) auto var(--rail-bottom) var(--rail-x);
     width:2px;
     background: linear-gradient(180deg, var(--accent), var(--accent-2));
     border-radius:1px;
     transform: scaleY(0);
     transform-origin: top;
     opacity:.95;
+    z-index: 0; /* rail derrière les cartes */
   }
   .section.reveal.in .timeline--rail::before{
     animation: railGrow 820ms cubic-bezier(.22,.9,.24,1) forwards;
   }
   @keyframes railGrow{ to { transform: scaleY(1); } }
 
-  /* === 2) Un DOT pour CHAQUE TITRE qu’on "pin" === */
-  /* On supprime le dot unique d'entrée (on va "pinner" les titres) */
-  .timeline--rail .entry::before { content: none; }
+  /* Les cartes (au-dessus du rail visuellement) */
+  .timeline--rail .entry{
+    position: relative;
+    z-index: 1;
+    padding-left: var(--entry-pad-left);
+    background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+    transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+  }
 
-  /* Les éléments marqués .pin créent un point à gauche, aligné sur le rail */
-  .timeline--rail .pin{ position: relative; }
+  /* On désactive l’ancien dot d’entrée (on “pinne” les titres) */
+  .timeline--rail .entry::before{ content: none; }
+
+  /* DOTS sur chaque élément .pin (where + h4…) */
+  .timeline--rail .pin{
+    position: relative;
+  }
+  /* point aligné sur le rail, centré sur la ligne du titre */
   .timeline--rail .pin::before{
     content:"";
     position:absolute;
-    /* aligne sur le rail : padding-left de .entry (48) - offset du point (12) */
-    left: calc(-48px + 12px);
-    /* place verticale : ajuste au besoin selon la taille de police */
-    top: 0.75em;
+    left: calc(-1 * var(--entry-pad-left) + var(--dot-left)); /* aligné au rail */
+    top: 0.62em;             /* centre vertical du texte (ajuste 0.58–0.70 si besoin) */
     width:10px; height:10px; border-radius:50%;
     background: linear-gradient(45deg, var(--accent), var(--accent-2));
     box-shadow:0 0 10px rgba(124,58,237,.55);
     transform: scale(.7);
     opacity: 0;
   }
-  /* animation quand l'entrée apparaît */
   .timeline--rail .entry.in .pin::before{
     animation: dotPop .5s cubic-bezier(.2,.8,.2,1) .08s forwards;
   }
@@ -512,18 +525,46 @@
     100%{ transform: scale(1);    opacity:1; }
   }
 
-  /* === 3) Resserre l’espace titres/texte === */
-  .entry h4{
-    margin: 10px 0 4px; /* ↓ marge bas plus serrée */
+  /* Hover premium */
+  .timeline--rail .entry:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 18px 46px rgba(0,0,0,.48);
+    border-color: rgba(124,58,237,.38);
   }
+
+  /* Stagger déjà branché (si tu as gardé fx-stagger + JS) */
+  .fx-stagger .entry > *{ opacity:0; transform: translateY(10px); }
+  .fx-stagger .entry.in > *{
+    animation: blockIn .52s ease forwards;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+  @keyframes blockIn{ to { opacity:1; transform:none; } }
+
+  /* Souligné animé sous les h4 (garde si tu l’aimes) */
+  .entry h4{ 
+    position:relative; display:inline-block;
+    margin: 8px 0 2px;     /* ↓ marge bas resserrée */
+    padding-bottom:2px;
+  }
+  .entry h4.u-accent{ text-decoration: none; }
+  .entry h4.u-accent::after{
+    content:"";
+    position:absolute; left:0; bottom:-2px;
+    height:.22em; width:100%;
+    background: linear-gradient(90deg, rgba(124,58,237,.85), rgba(37,99,235,.85));
+    border-radius:4px;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  .entry.in h4.u-accent::after{
+    animation: underlineIn .48s cubic-bezier(.22,.9,.24,1) forwards;
+  }
+  @keyframes underlineIn{ to { transform: scaleX(1); } }
+
+  /* Espaces texte resserrés sous les sous-titres */
   .entry p,
   .entry ul{ 
-    margin-top: 2px;    /* ↓ colle davantage au h4 */
+    margin-top: 0;         /* colle le texte au h4 */
   }
-  /* Option : resserrer aussi l’espace entre lignes de la liste */
-  .entry ul { 
-    margin-bottom: 10px; 
-  }
-  .entry ul li { 
-    margin: 4px 0; 
-  }
+  .entry ul { margin-bottom: 10px; }
+  .entry ul li { margin: 4px 0; }
