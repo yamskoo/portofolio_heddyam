@@ -1,56 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Professional Experience · Yamine</title>
+  <title>Expérience Professionnelle · Yamine</title>
   <link rel="stylesheet" href="../assets/styles.css" />
 </head>
 <body>
   <header class="nav">
     <div class="brand"><span class="dot"></span> Yamine · Portfolio</a></div>
 
-    <button class="hamburger" aria-controls="main-menu" aria-expanded="false" aria-label="Open menu">☰</button>
+    <button class="hamburger" aria-controls="main-menu" aria-expanded="false" aria-label="Ouvrir le menu">☰</button>
 
     <nav id="main-menu" class="menu">
-      <a href="index.html">Home</a>
-      <a href="whoami.html">Professional</a>
-      <a href="academic.html">Academic</a>
+      <a href="index.html">Accueil</a>
+      <a href="quisuisje.html">Qui suis-je ?</a>
+      <a href="universitaire.html">Universitaire</a>
       <a href="contact.html">Contact</a>
-      <a href="../fr/professionnel.html">FR</a>
+      <a href="../en/professional.html">EN</a>
     </nav>
   </header>
 
   <section class="section reveal">
-    <h2 class="glow">Professional Experience</h2>
-    <p>Selected roles with measurable outcomes.</p>
+    <h2 class="glow">Expérience Professionnelle</h2>
+    <p>Sélection de missions avec résultats mesurables.</p>
 
-    <div class="timeline">
+    <div class="timeline timeline--rail">
       <article class="entry">
-        <div class="when">Feb 2025 – Aug 2025 · Rungis, FR</div>
-        <div class="where">Thales LAS — Systems Integration Engineer (Intern)</div>
+        <div class="when">Fév. 2025 – Août 2025 · Rungis, FR</div>
+        <div class="where">Thales LAS — Ingénieur Intégration Système (Stage)</div>
+        <h4>Contexte</h4>
+        <p>
+          TopSky-ATC, solution de gestion du trafic aérien développée par Thales, assure aujourd’hui 
+          la sécurité de près de 40 % de l’espace aérien mondial.  
+          Au sein de l’équipe Intégration, dont la mission était de garantir l’intégration, le déploiement 
+          et la supervision des releases, j’ai travaillé sur un outil interne dédié à la génération, 
+          à la distribution et à l’installation des versions du produit.
+        </p>
+      
+        <h4>Problématique</h4>
+        <p>
+          L’outil en place montrait ses limites, avec des échanges perfectibles sur le plan de la sécurité, 
+          une traçabilité incomplète, un manque de centralisation et des manipulations manuelles chronophages 
+          pour les intégrateurs.
+        </p>
+      
+        <h4>Objectif</h4>
+        <p>
+          Concevoir et déployer une chaîne sécurisée et automatisée basée sur HTTPS et Artifactory pour publier 
+          et récupérer les versions tout en centralisant les artefacts et en fiabilisant la traçabilité.
+        </p>
+      
+        <h4>Missions</h4>
         <ul>
-          <li>Designed and implemented secure HTTPS protocol for file transfers on JFrog Artifactory; integrated with Jenkins CI/CD.</li>
-          <li>Auth, certificates, tokens; wrote specs and automated deployment scripts; unit & non-regression tests.</li>
-          <li>Outcome: secure, auditable releases; improved reliability of deployments.</li>
+          <li>Cadrage : recueil des besoins, étude de faisabilité, choix de l’architecture cible.</li>
+          <li>Conception & déploiement d’une solution HTTPS + Artifactory.</li>
+          <li>Évolutions outil :
+            <ul>
+              <li><strong>publish</strong> : publication automatique des versions sur Artifactory (HTTPS).</li>
+              <li><strong>import</strong> : récupération/installation depuis Artifactory sur les machines cibles.</li>
+            </ul>
+          </li>
+          <li>Tests unitaires et non-régression.</li>
+          <li>Intégration CI/CD Jenkins : automatisation des tests unitaires et création d’une vApp template dans le catalogue VMware.</li>
+          <li>Rédaction des spécifications et de la documentation.</li>
+        </ul>
+      
+        <h4>Outils & méthodes</h4>
+        <p>
+          Python, Bash, Jenkins, Git, Github/Bitbucket, MobaXterm, Artifactory, Linux (RHEL7), Apache, certificats SSL/TLS, VMware.  
+          Méthodo Agile (Jira) et coordination Sécurité/Réseau/Intégration.
+        </p>
+      
+        <h4>Résultats</h4>
+        <ul>
+          <li>Chaîne centralisée, sécurisée et automatisée pour la gestion des versions.</li>
+          <li>Réduction des manipulations manuelles et amélioration de la traçabilité.</li>
+          <li>Solution robuste, adaptée pour l’équipe et prête pour les environnements opérationnels.</li>
+        </ul>
+      </article>     
+
+      <article class="entry">
+        <div class="when">Avr. 2024 – Août 2024 · Vélizy, FR</div>
+        <div class="where">Thales AVS — Ingénieur Industrie 4.0 (Stage)</div>
+        <ul>
+          <li>Amélioration d’un logiciel de supervision (corrections, perf, doc) et déploiement en nouvelles zones (Modbus).</li>
+          <li>Analyse de données capteurs pour initiatives d’efficacité énergétique.</li>
         </ul>
       </article>
 
       <article class="entry">
-        <div class="when">Apr 2024 – Aug 2024 · Vélizy, FR</div>
-        <div class="where">Thales AVS — Industry 4.0 Engineer (Intern)</div>
+        <div class="when">Juin 2022 – Août 2022 · Montrouge, FR</div>
+        <div class="where">CACEIS Crédit Agricole — Assistant Business Engineering (Stage)</div>
         <ul>
-          <li>Improved industrial supervision software (bug fixes, perf optim, tech docs) and deployed in new shopfloor zones (Modbus).</li>
-          <li>Analyzed sensor data to support energy efficiency initiatives.</li>
-        </ul>
-      </article>
-
-      <article class="entry">
-        <div class="when">Jun 2022 – Aug 2022 · Montrouge, FR</div>
-        <div class="where">CACEIS Crédit Agricole — Assistant Business Engineering (Intern)</div>
-        <ul>
-          <li>Structured minutes to capture decisions and supported data migration with RFPdia.</li>
-          <li>Frequent exchanges with international teams; strengthened cross-cultural communication.</li>
+          <li>Comptes rendus structurés, support migration de données (RFPdia).</li>
+          <li>Échanges fréquents internationaux ; communication interculturelle renforcée.</li>
         </ul>
       </article>
     </div>

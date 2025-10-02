@@ -165,7 +165,6 @@
 
     const onScroll = () => {
       if (document.documentElement.classList.contains('is-scrolling')) return;
-      
       const y = window.scrollY || window.pageYOffset;
       els.forEach(el=>{
         const sp = parseFloat(el.dataset.speed || '0.1');
