@@ -114,7 +114,7 @@
     width:100%;
     box-sizing:border-box;
     display:flex; align-items:center; justify-content:space-between; gap:12px;
-    padding:14px 16px; position:sticky; top:0; z-index:20;
+    padding:14px 16px; position:sticky; top:0; z-index:100;
     backdrop-filter:saturate(140%) blur(8px);
     background:rgba(10,10,20,.4);
     border-bottom:1px solid rgba(255,255,255,.06);
@@ -253,6 +253,7 @@
     grid-template-columns: 1fr;
     gap:24px;
     padding:38px 20px 10px;
+    overflow: hidden;
   }
 
   .about-hero__text .button { align-self:flex-start }
@@ -260,6 +261,10 @@
   .about-hero__media{
     display:flex; justify-content:center; align-items:center;
     padding:10px;
+  }
+  .about-hero__media,
+  .about-hero__media * {
+    pointer-events: none;
   }
 
   .photo-ring{
