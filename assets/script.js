@@ -55,12 +55,18 @@
       const diff = toY - startY;
       if (Math.abs(diff) < 1) return;
   
+      document.documentElement.classList.add('is-scrolling');
+
       let start;
       const step = (ts) => {
         if (!start) start = ts;
         const t = Math.min(1, (ts - start) / duration);
         setScrollTop(startY + diff * ease(t));
-        if (t < 1) requestAnimationFrame(step);
+        if (t < 1) {
+          requestAnimationFrame(step);
+        } else {
+          document.documentElement.classList.remove('is-scrolling');
+        }
       };
       requestAnimationFrame(step);
     };
@@ -118,6 +124,10 @@
     };
     set();
     window.addEventListener('resize', set);
+    window.addEventListener('orientationchange', set);
+    window.addEventListener('pageshow', set);
+    window.addEventListener('visibilitychange', set);
+    window.addEventListener('load', set);
   })();
    
   // Mobile menu toggle (hamburger)
@@ -150,8 +160,12 @@
   (function(){
     const els = document.querySelectorAll('.parallax');
     if(!els.length) return;
+
     const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
     const onScroll = () => {
+      if (document.documentElement.classList.contains('is-scrolling')) return;
+      
       const y = window.scrollY || window.pageYOffset;
       els.forEach(el=>{
         const sp = parseFloat(el.dataset.speed || '0.1');
