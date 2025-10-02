@@ -456,9 +456,15 @@
 
   /* === Rail de timeline animé === */
   /* === 1) RAIL : ne dépasse plus en haut/bas === */
-  .timeline--rail { 
-    position: relative; 
-    padding-top: 8px;           /* un peu d'air pour le départ du rail */
+  .timeline--rail {
+    --rail-x: 18px;          /* position horizontale du rail */
+    --rail-top: 26px;        /* décalage haut du rail (évite le dépassement) */
+    --rail-bottom: 12px;     /* décalage bas du rail */
+    --entry-pad-left: 48px;  /* padding-left des .entry (place pour rail + dot) */
+    --dot-left: 12px;        /* décalage du dot depuis le bord de l'entry */
+    isolation: isolate;      /* pour gérer le z-index proprement */
+    position: relative;
+    padding-top: 8px;        /* un peu d’air au dessus */
   }
   .timeline--rail::before{
     content:"";
@@ -490,7 +496,7 @@
     /* aligne sur le rail : padding-left de .entry (48) - offset du point (12) */
     left: calc(-48px + 12px);
     /* place verticale : ajuste au besoin selon la taille de police */
-    top: 0.68em;
+    top: 0.75em;
     width:10px; height:10px; border-radius:50%;
     background: linear-gradient(45deg, var(--accent), var(--accent-2));
     box-shadow:0 0 10px rgba(124,58,237,.55);
