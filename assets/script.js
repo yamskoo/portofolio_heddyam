@@ -209,3 +209,17 @@
         }, {passive:true});
       }
   })();
+
+  // Stagger: affecte une variable CSS --i à chaque enfant d'une .entry pour l'animation en cascade
+  (function(){
+    const containers = document.querySelectorAll('.fx-stagger .entry');
+    containers.forEach(entry=>{
+      let i = 0;
+      Array.from(entry.children).forEach(el=>{
+        // On peut ignorer certains éléments si tu veux (ex: ignorer .when/.where)
+        // if(el.classList.contains('when') || el.classList.contains('where')) return;
+        el.style.setProperty('--i', i++);
+      });
+    });
+  })();
+
