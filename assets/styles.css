@@ -466,6 +466,7 @@
     --rail-bottom: 12px;     /* décalage bas du rail */
     --entry-pad-left: 48px;  /* padding-left des .entry (place pour rail + dot) */
     --dot-left: 12px;        /* décalage du dot depuis le bord de l'entry */
+    --dot-top: 0.54em;
     isolation: isolate;      /* pour gérer le z-index proprement */
     position: relative;
     padding-top: 8px;        /* un peu d’air au dessus */
@@ -510,10 +511,12 @@
     content:"";
     position:absolute;
     left: calc(-1 * var(--entry-pad-left) + var(--dot-left)); /* aligné au rail */
-    top: 0.62em;             /* centre vertical du texte (ajuste 0.58–0.70 si besoin) */
-    width:10px; height:10px; border-radius:50%;
-    background: linear-gradient(45deg, var(--accent), var(--accent-2));
-    box-shadow:0 0 10px rgba(124,58,237,.55);
+    top: var(--dot-top);             /* centre vertical du texte (ajuste 0.58–0.70 si besoin) */
+    width:11px; height:11px; border-radius:50%;
+    background: radial-gradient(circle at 40% 40%, #ffffff 0 42%, #a78bfa 60% 100%);
+    box-shadow:
+      0 0 12px rgba(167,139,250,.85),
+      0 0 26px rgba(167,139,250,.45);
     transform: scale(.7);
     opacity: 0;
   }
@@ -568,3 +571,35 @@
   }
   .entry ul { margin-bottom: 10px; }
   .entry ul li { margin: 4px 0; }
+
+  /* Un poil plus d’espace entre le badge et l’image */
+  .entry .badge{
+    margin-bottom: 10px;   /* + espace sous le badge */
+  }
+  .entry .media{
+    margin-top: 2px;       /* micro espace avant l’image (optionnel) */
+  }
+
+  /* Soulignement des titres à la longueur du mot (et animé) */
+  /* On désactive l'ancien souligné via ::after s'il existe */
+  .timeline--rail .entry h4.u-accent::after{ content:none !important; }
+
+  /* Nouveau souligné en background (s’anime quand .entry devient .in) */
+  .timeline--rail .entry h4.u-accent{
+    display: inline;                 /* largeur = texte uniquement */
+    padding-bottom: 2px;
+    background-image: linear-gradient(90deg,
+      rgba(124,58,237,.90), rgba(37,99,235,.90));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0 0.22em;       /* caché par défaut */
+    transition: background-size .48s cubic-bezier(.22,.9,.24,1);
+  }
+  .timeline--rail .entry.in h4.u-accent{
+    background-size: 100% 0.22em;    /* s’étend juste sous le texte */
+  }
+
+  /* D) (facultatif) un tout petit lift visuel du rail en haut */
+  .timeline--rail{
+    --rail-top: 22px;   /* si tu veux que le rail parte un poil plus bas */
+  }
