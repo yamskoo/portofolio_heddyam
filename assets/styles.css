@@ -466,23 +466,24 @@
     --rail-bottom: 12px;     /* décalage bas du rail */
     --entry-pad-left: 48px;  /* padding-left des .entry (place pour rail + dot) */
     --dot-left: 12px;        /* décalage du dot depuis le bord de l'entry */
-    --dot-top: 0.54em;
-    isolation: isolate;      /* pour gérer le z-index proprement */
+    --dot-top: 0.52em;       /* hauteur du dot sur la ligne de texte (0.50–0.58 au besoin) */
+
+    isolation: isolate;      /* z-index propre */
     position: relative;
     padding-top: 8px;        /* un peu d’air au dessus */
   }
 
-  /* RAIL : ne dépasse plus grâce à inset + isolation */
+  /* RAIL : ne dépasse plus (inset top/bottom), et reste derrière les cartes */
   .timeline--rail::before{
     content:"";
     position:absolute;
     inset: var(--rail-top) auto var(--rail-bottom) var(--rail-x);
-    width:2px;
+    width: 2px; /* rail fin */
     background: linear-gradient(180deg, var(--accent), var(--accent-2));
-    border-radius:1px;
+    border-radius: 1px;
     transform: scaleY(0);
     transform-origin: top;
-    opacity:.95;
+    opacity: .95;
     z-index: 0; /* rail derrière les cartes */
   }
   .section.reveal.in .timeline--rail::before{
@@ -503,20 +504,24 @@
   .timeline--rail .entry::before{ content: none; }
 
   /* DOTS sur chaque élément .pin (where + h4…) */
-  .timeline--rail .pin{
-    position: relative;
-  }
+  .timeline--rail .pin{ position: relative; }
+
   /* point aligné sur le rail, centré sur la ligne du titre */
   .timeline--rail .pin::before{
     content:"";
     position:absolute;
     left: calc(-1 * var(--entry-pad-left) + var(--dot-left)); /* aligné au rail */
-    top: var(--dot-top);             /* centre vertical du texte (ajuste 0.58–0.70 si besoin) */
-    width:11px; height:11px; border-radius:50%;
-    background: radial-gradient(circle at 40% 40%, #ffffff 0 42%, #a78bfa 60% 100%);
+    top: var(--dot-top);                                       /* centre vertical du texte */
+
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #7c3aed; /* violet plein */
+    border: 1.5px solid rgba(255,255,255,.95); /* fin liseré blanc */
     box-shadow:
-      0 0 12px rgba(167,139,250,.85),
-      0 0 26px rgba(167,139,250,.45);
+      0 0 10px rgba(124,58,237,.55),  /* glow violet */
+      0 0 22px rgba(124,58,237,.35);  /* halo doux */
+
     transform: scale(.7);
     opacity: 0;
   }
@@ -535,7 +540,7 @@
     border-color: rgba(124,58,237,.38);
   }
 
-  /* Stagger déjà branché (si tu as gardé fx-stagger + JS) */
+  /* Stagger (si fx-stagger + JS) */
   .fx-stagger .entry > *{ opacity:0; transform: translateY(10px); }
   .fx-stagger .entry.in > *{
     animation: blockIn .52s ease forwards;
@@ -543,63 +548,44 @@
   }
   @keyframes blockIn{ to { opacity:1; transform:none; } }
 
-  /* Souligné animé sous les h4 (garde si tu l’aimes) */
-  .entry h4{ 
-    position:relative; display:inline-block;
-    margin: 8px 0 2px;     /* ↓ marge bas resserrée */
-    padding-bottom:2px;
+  /* Titres: souligné animé à la longueur réelle du texte */
+  .entry h4{
+    position:relative; 
+    display:inline-block;
+    margin: 8px 0 2px;     /* marge bas resserrée */
+    padding-bottom: 2px;
   }
-  .entry h4.u-accent{ text-decoration: none; }
-  .entry h4.u-accent::after{
-    content:"";
-    position:absolute; left:0; bottom:-2px;
-    height:.22em; width:100%;
-    background: linear-gradient(90deg, rgba(124,58,237,.85), rgba(37,99,235,.85));
-    border-radius:4px;
-    transform: scaleX(0);
-    transform-origin: left;
+
+  /* neutralise toute ancienne version de souligné via ::after */
+  .entry h4.u-accent::after,
+  .timeline--rail .entry h4.u-accent::after{ content:none !important; }
+
+  /* souligné via background-size (suivant la largeur du texte) */
+  .timeline--rail .entry h4.u-accent{
+    text-decoration: none !important;
+    display: inline !important;       /* largeur = texte uniquement */
+    width: auto !important;
+    max-width: max-content !important;
+
+    background-image: linear-gradient(90deg,
+      rgba(124,58,237,.95), rgba(37,99,235,.95));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0 0.22em;        /* caché par défaut */
+    transition: background-size .48s cubic-bezier(.22,.9,.24,1);
   }
-  .entry.in h4.u-accent::after{
-    animation: underlineIn .48s cubic-bezier(.22,.9,.24,1) forwards;
+  .timeline--rail .entry.in h4.u-accent{
+    background-size: 100% 0.22em;     /* s’étend juste sous le texte */
   }
-  @keyframes underlineIn{ to { transform: scaleX(1); } }
 
   /* Espaces texte resserrés sous les sous-titres */
   .entry p,
   .entry ul{ 
-    margin-top: 0;         /* colle le texte au h4 */
+    margin-top: 0;          /* colle le texte au h4 */
   }
   .entry ul { margin-bottom: 10px; }
   .entry ul li { margin: 4px 0; }
 
   /* Un poil plus d’espace entre le badge et l’image */
-  .entry .badge{
-    margin-bottom: 10px;   /* + espace sous le badge */
-  }
-  .entry .media{
-    margin-top: 2px;       /* micro espace avant l’image (optionnel) */
-  }
-
-  /* Soulignement des titres à la longueur du mot (et animé) */
-  /* On désactive l'ancien souligné via ::after s'il existe */
-  .timeline--rail .entry h4.u-accent::after{ content:none !important; }
-
-  /* Nouveau souligné en background (s’anime quand .entry devient .in) */
-  .timeline--rail .entry h4.u-accent{
-    display: inline;                 /* largeur = texte uniquement */
-    padding-bottom: 2px;
-    background-image: linear-gradient(90deg,
-      rgba(124,58,237,.90), rgba(37,99,235,.90));
-    background-repeat: no-repeat;
-    background-position: 0 100%;
-    background-size: 0 0.22em;       /* caché par défaut */
-    transition: background-size .48s cubic-bezier(.22,.9,.24,1);
-  }
-  .timeline--rail .entry.in h4.u-accent{
-    background-size: 100% 0.22em;    /* s’étend juste sous le texte */
-  }
-
-  /* D) (facultatif) un tout petit lift visuel du rail en haut */
-  .timeline--rail{
-    --rail-top: 22px;   /* si tu veux que le rail parte un poil plus bas */
-  }
+  .entry .badge{ margin-bottom: 12px; }
+  .entry .media{ margin-top: 4px; }
