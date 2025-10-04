@@ -454,6 +454,22 @@
     50%     { transform: translateX(6px); opacity:1; }
   }
 
+  /* 1) Cibler seulement le cas p suivi d’un ul (recommandé) */
+  .entry p + ul { margin-top: 4px; }      /* mets 0–6px selon ton goût */
+
+  /* 2) Diminuer la marge du paragraphe qui précède une liste (navigateurs modernes) */
+  .entry p:has(+ ul) { margin-bottom: 6px; }
+
+  /* 3) Plus global : réduire la marge par défaut des listes dans tes .entry */
+  .entry ul { margin-top: 6px; }
+
+  /* 4) Local à un bloc précis */
+  .ul-tight { margin-top: 4px; }          /* ajoute class="ul-tight" sur le <ul> */
+
+  /* Espacements propres sans <br> */
+  .list-tight { margin-top: 4px; }
+  .list-tight li + li { margin-top: 8px; } /* espace entre bullets */
+
   /* === Rail de timeline animé === */
   /* =======================================================
    RAIL + DOTS (alignés), pas de dépassement, spacing serré
