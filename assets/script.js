@@ -16,6 +16,8 @@
       entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add('in');
+          const tl = e.target.closest('.timeline--rail');
+          if (tl) tl.classList.add('in');
           io.unobserve(e.target);
         }
       });

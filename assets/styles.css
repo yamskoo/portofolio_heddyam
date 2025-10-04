@@ -486,8 +486,10 @@
     opacity: .95;
     z-index: 0; /* rail derrière les cartes */
   }
-
-  .timeline--rail.in::before{ animation: railGrow 820ms cubic-bezier(.22,.9,.24,1) forwards; }
+  /* déclenche le rail sans dépendre de .section.reveal */
+  .timeline--rail.in::before{
+    animation: railGrow 820ms cubic-bezier(.22,.9,.24,1) forwards;
+  }
 
   @keyframes railGrow{ to { transform: scaleY(1); } }
 
