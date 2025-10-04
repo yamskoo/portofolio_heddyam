@@ -466,7 +466,7 @@
     --rail-bottom: 12px;     /* décalage bas du rail */
     --entry-pad-left: 48px;  /* padding-left des .entry (place pour rail + dot) */
     --dot-left: 12px;        /* décalage du dot depuis le bord de l'entry */
-    --dot-top: 0.95em;       /* hauteur du dot sur la ligne de texte (0.50–0.58 au besoin) */
+    --dot-top: 0.58em;       /* hauteur du dot sur la ligne de texte (0.50–0.58 au besoin) */
 
     isolation: isolate;      /* z-index propre */
     position: relative;
