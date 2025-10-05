@@ -788,7 +788,7 @@
     justify-content: flex-start !important;
     /* on neutralise le gap pour garder la main sur les espacements */
     gap: 0 !important;
-    padding-top: 6vh !important;  /* titre un peu plus haut */
+    padding-top: 1vh !important;  /* titre un peu plus haut */
   }
 
   body.page-landing .title,
@@ -814,7 +814,7 @@
     gap: 14px !important;
     width: 100% !important;
     max-width: 720px !important;
-    margin: 0 0 28px 0 !important; /* ← espace ENTRE langues et logos */
+    margin: 0 0 45px 0 !important; /* ← espace ENTRE langues et logos */
   }
 
   body.page-landing .card.lang{
@@ -839,7 +839,7 @@
     margin: 0 !important; /* l'espace au-dessus est géré par .lang-grid */
   }
   body.page-landing .logo{
-    height: 72px !important;           /* passe à 80px si tu veux plus grand */
+    height: 64px !important;           /* passe à 80px si tu veux plus grand */
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
