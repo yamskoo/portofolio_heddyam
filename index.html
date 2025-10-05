@@ -4,31 +4,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Choose Language · Yamine Portfolio</title>
+
+  <!-- Fonts & global CSS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css" />
   <link rel="icon" href="data:,">
 </head>
-<body>
-  <main class="container center language">
-    <h1 class="title glow">Welcome · Bienvenue</h1>
-    <p class="subtitle">Select your language / Choisissez votre langue</p>
-    <div class="lang-grid">
-      <a class="card lang" href="en/">
-        <div>
-          <h2>English</h2>
-          <p>View the portfolio in English</p>
-        </div>
+<body class="page-landing">
+  <main class="landing-screen" role="main" aria-label="Language selection">
+    <!-- TOP: Titre -->
+    <header class="landing-top">
+      <h1 class="landing-title glow">Welcome · Bienvenue</h1>
+      <p class="landing-subtitle">Select your language / Choisissez votre langue</p>
+    </header>
+
+    <!-- MIDDLE: Choix de langue (côte à côte, sans texte dessous, avec emoji) -->
+    <section class="landing-lang" aria-label="Languages">
+      <a class="lang-btn" href="en/" aria-label="Open English version">
+        <span class="flag" aria-hidden="true">🇬🇧</span>
+        <span class="lang-label">English</span>
       </a>
-      <a class="card lang" href="fr/">
-        <div>
-          <h2>Français</h2>
-          <p>Voir le portfolio en français</p>
-        </div>
+      <a class="lang-btn" href="fr/" aria-label="Ouvrir la version française">
+        <span class="flag" aria-hidden="true">🇫🇷</span>
+        <span class="lang-label">Français</span>
       </a>
-    </div>
+    </section>
+
+    <!-- BOTTOM: 3 logos carrés visibles sans scroller -->
+    <section class="landing-logos" aria-label="Partner logos">
+      <!-- Remplace les src par tes logos carrés -->
+      <div class="logo"><img src="photo/logo4.webp" alt="Logo 1"></div>
+      <div class="logo"><img src="photo/logo2.webp" alt="Logo 2"></div>
+      <div class="logo"><img src="photo/logo3.png" alt="Logo 3"></div>
+    </section>
   </main>
+
+  <!-- JS global existant -->
   <script src="assets/script.js"></script>
 </body>
 </html>
