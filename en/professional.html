@@ -1,107 +1,175 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Expérience Professionnelle · Yamine</title>
+  <title>Professional Experience · Yamine</title>
   <link rel="stylesheet" href="../assets/styles.css" />
 </head>
 <body>
   <header class="nav">
-    <div class="brand"><span class="dot"></span> Yamine · Portfolio</a></div>
-
-    <button class="hamburger" aria-controls="main-menu" aria-expanded="false" aria-label="Ouvrir le menu">☰</button>
-
+    <div class="brand"><span class="dot"></span> Yamine · Portfolio</div>
+    <button class="hamburger" aria-controls="main-menu" aria-expanded="false" aria-label="Open menu">☰</button>
     <nav id="main-menu" class="menu">
-      <a href="index.html">Accueil</a>
-      <a href="whoami.html">Qui suis-je ?</a>
-      <a href="academic.html">Universitaire</a>
+      <a href="index.html">Home</a>
+      <a href="quisuisje.html">About me</a>
+      <a href="universitaire.html">Academics</a>
       <a href="contact.html">Contact</a>
-      <a href="../fr/professionnel.html">EN</a>
+      <a href="../en/professional.html">EN</a>
     </nav>
   </header>
 
-  <section class="section reveal">
-    <h2 class="glow">Expérience Professionnelle</h2>
-    <p>Sélection de missions avec résultats mesurables.</p>
+  <section class="section">
+    <h1 class="glow">Professional Experiences</h1>
+    <p>My representative professional experiences, with concrete missions and achieved results</p>
 
-    <div class="timeline timeline--rail">
-      <article class="entry">
-        <div class="when">Fév. 2025 – Août 2025 · Rungis, FR</div>
-        <div class="where">Thales LAS — Ingénieur Intégration Système (Stage)</div>
-        <h4>Contexte</h4>
-        <p>
-          TopSky-ATC, solution de gestion du trafic aérien développée par Thales, assure aujourd’hui 
-          la sécurité de près de 40 % de l’espace aérien mondial.  
-          Au sein de l’équipe Intégration, dont la mission était de garantir l’intégration, le déploiement 
-          et la supervision des releases, j’ai travaillé sur un outil interne dédié à la génération, 
-          à la distribution et à l’installation des versions du produit.
+    <div class="timeline timeline--rail fx-stagger">
+      <!-- First experience -->
+      <article class="entry reveal">
+        <div class="when">Internship · Feb. 2025 – Aug. 2025 · Rungis, FR</div>
+        <div class="where pin">Systems Integration Engineer</div>
+        <div class="badge">Thales LAS</div>
+        <!-- Illustrative image (optional) -->
+        <div class="media">
+          <div class="frame ar-land parallax" data-speed="0.08">
+            <img src="../photo/radar.jpg" alt="TopSky-ATC (air traffic) illustration" />
+          </div>
+        </div>
+        <h4 class="u-accent pin">Context</h4>
+        <p>TopSky-ATC, an air traffic management solution developed by <span class="mark">Thales</span>, currently ensures the safety of nearly <strong>40%</strong> of the <span class="mark">world’s airspace</span>.<br><br>
+           Within the <span class="mark">Integration</span> team—responsible for ensuring integration, deployment, and supervision of releases—I worked on an internal tool dedicated to <span class="mark">building</span>, <span class="mark">distributing</span>, and <span class="mark">installing</span> product versions.
         </p>
-      
-        <h4>Problématique</h4>
-        <p>
-          L’outil en place montrait ses limites, avec des échanges perfectibles sur le plan de la sécurité, 
-          une traçabilité incomplète, un manque de centralisation et des manipulations manuelles chronophages 
-          pour les intégrateurs.
+        
+        <h4 class="u-accent pin">Problem</h4>
+        <p>The existing tool showed its limits: <span class="mark">security</span>-wise exchanges to improve, incomplete <span class="mark">traceability</span>, lack of <span class="mark">centralization</span>, and <span class="mark">manual, time-consuming</span> steps for integrators.</p>
+        
+        <h4 class="u-accent pin">Goal</h4>
+        <p><span class="mark">Design</span> and <span class="mark">deploy</span> a secure, automated pipeline based on <span class="mark">HTTPS</span> and <span class="mark">Artifactory</span> to publish and retrieve versions, while centralizing artifacts and strengthening traceability.</p>
+        
+        <h4 class="u-accent pin">Missions</h4>
+        <p><span class="mark">Scoping:</span> requirements gathering, feasibility study, target architecture choice.</p>
+        <p><span class="mark">Design &amp; deployment:</span> implementation of an HTTPS + Artifactory solution.</p>
+        <p><span class="mark">Tool evolutions:</span><br>
+        <strong>publish</strong> – automatic publication of versions to Artifactory (via HTTPS).<br>
+        <strong>import</strong> – retrieval and installation from Artifactory onto target machines.
         </p>
-      
-        <h4>Objectif</h4>
-        <p>
-          Concevoir et déployer une chaîne sécurisée et automatisée basée sur HTTPS et Artifactory pour publier 
-          et récupérer les versions tout en centralisant les artefacts et en fiabilisant la traçabilité.
-        </p>
-      
-        <h4>Missions</h4>
-        <ul>
-          <li>Cadrage : recueil des besoins, étude de faisabilité, choix de l’architecture cible.</li>
-          <li>Conception & déploiement d’une solution HTTPS + Artifactory.</li>
-          <li>Évolutions outil :
-            <ul>
-              <li><strong>publish</strong> : publication automatique des versions sur Artifactory (HTTPS).</li>
-              <li><strong>import</strong> : récupération/installation depuis Artifactory sur les machines cibles.</li>
-            </ul>
-          </li>
-          <li>Tests unitaires et non-régression.</li>
-          <li>Intégration CI/CD Jenkins : automatisation des tests unitaires et création d’une vApp template dans le catalogue VMware.</li>
-          <li>Rédaction des spécifications et de la documentation.</li>
-        </ul>
-      
-        <h4>Outils & méthodes</h4>
-        <p>
-          Python, Bash, Jenkins, Git, Github/Bitbucket, MobaXterm, Artifactory, Linux (RHEL7), Apache, certificats SSL/TLS, VMware.  
-          Méthodo Agile (Jira) et coordination Sécurité/Réseau/Intégration.
-        </p>
-      
-        <h4>Résultats</h4>
-        <ul>
-          <li>Chaîne centralisée, sécurisée et automatisée pour la gestion des versions.</li>
-          <li>Réduction des manipulations manuelles et amélioration de la traçabilité.</li>
-          <li>Solution robuste, adaptée pour l’équipe et prête pour les environnements opérationnels.</li>
-        </ul>
-      </article>     
-
-      <article class="entry">
-        <div class="when">Avr. 2024 – Août 2024 · Vélizy, FR</div>
-        <div class="where">Thales AVS — Ingénieur Industrie 4.0 (Stage)</div>
-        <ul>
-          <li>Amélioration d’un logiciel de supervision (corrections, perf, doc) et déploiement en nouvelles zones (Modbus).</li>
-          <li>Analyse de données capteurs pour initiatives d’efficacité énergétique.</li>
-        </ul>
+        <p><span class="mark">Testing:</span> unit tests and non-regression tests.</p>
+        <p><span class="mark">CI/CD integration (Jenkins):</span> automated unit tests and creation of a vApp template in the VMware catalog.</p>
+        <p><span class="mark">Documentation:</span> drafting of technical specifications and user documentation.</p>
+        
+        <h4 class="u-accent pin">Tools &amp; Methods</h4>
+        <p>Python, Bash, Jenkins, Git (Github/Bitbucket), MobaXterm, Artifactory, Linux (RHEL7), Apache, SSL/TLS certificates, VMware.<br><br>
+        Agile methodology (Jira), coordination with Configuration/Integration teams.</p>
+        
+        <h4 class="u-accent pin">Results</h4>
+        <p>Implementation of a <span class="mark">centralized, secure, and automated</span> chain for managing product versions.</p>
+        <p>Reduction of <span class="mark">manual operations</span> and improved <span class="mark">release traceability</span>.</p>
+        <p>A <span class="mark">robust and tailored</span> solution for the team, ready for use in <span class="mark">operational environments.</span></p>
       </article>
+    </div>
 
-      <article class="entry">
-        <div class="when">Juin 2022 – Août 2022 · Montrouge, FR</div>
-        <div class="where">CACEIS Crédit Agricole — Assistant Business Engineering (Stage)</div>
+    <div class="timeline timeline--rail fx-stagger">
+      <!-- Second experience -->
+      <article class="entry reveal">
+        <div class="when">Internship · Apr. 2024 – Aug. 2024 · Vélizy, FR</div>
+        <div class="where pin">Industry 4.0 Engineer</div>
+        <div class="badge">Thales AVS</div>
+        <!-- Illustrative image (optional) -->
+        <div class="media">
+          <div class="frame ar-land parallax" data-speed = "0.08">
+            <img src="../photo/usine.jpg" alt="Factory illustration" />
+          </div>
+        </div>
+        <h4 class="u-accent pin">Context</h4>
+        <p>Thales Avionics, one of Thales’ largest <span class="mark">industrial sites</span> in France with over <strong>2,500 employees</strong>. I joined the <span class="mark">Industry 4.0</span> team directly attached to the plant.<br><br>
+           My mission focused on evolving <span class="mark">digital production tools</span> with a dual focus: <span class="mark">supervision</span> of industrial equipment (benches, ovens, pumps, baths, etc.) and <span class="mark">collection</span> of the plant’s machines’ energy data.
+        </p>
+        
+        <h4 class="u-accent pin">Problem</h4>
+        <p>
+           Two main challenges guided this internship:
+        </p>
         <ul>
-          <li>Comptes rendus structurés, support migration de données (RFPdia).</li>
-          <li>Échanges fréquents internationaux ; communication interculturelle renforcée.</li>
+          <li>An <span class="mark">industrial supervision</span> software experiencing <span class="mark">malfunctions</span> in display (unrecognized machines, inconsistent data, wrong states), complicating <span class="mark">real-time</span> monitoring for operators.</li><br>
+          <li>The need to integrate machines into a new <span class="mark">energy collection</span> software to ensure reliable <span class="mark">consumption</span> reporting. This project aligned with the plant’s 2030 <span class="mark">carbon footprint</span> reduction roadmap, centralizing data to pilot energy consumption.</li>
         </ul>
+        
+        <h4 class="u-accent pin">Goal</h4>
+        <p>Improve the reliability of the <span class="mark">industrial supervision</span> software, and deploy a new energy collection tool, to guarantee <span class="mark">reliable data</span> reporting that is centralized and usable by operators and the plant.</p>
+        
+        <h4 class="u-accent pin">Missions</h4>
+        <p><span class="mark">Industrial supervision:</span></p>
+        <ul>
+          <li>Analyze and fix malfunctions: machine connection failures, missing or inconsistent data, display errors.</li>
+          <li>Optimize communication between equipment and PCs via a Siemens module (TCP/IP).</li>
+        </ul>
+        <p><span class="mark">Data collection:</span></p>
+        <ul>
+          <li>Integrate machines into the new consumption collection tool.</li>
+          <li>Verify the reliability and usability of energy data.</li>
+          <li>Contribute to documentation and follow-ups on changes.</li>
+        </ul>
+        
+        <h4 class="u-accent pin">Tools &amp; Methods</h4>
+        <p>
+        <span class="mark">Technical:</span> industrial supervision, TCP/IP protocols, Siemens module, energy collection software, Python (JSON file handling, multi-threading, MQTT), Bash.
+        <span class="mark">Methods:</span> direct interaction with operators, incremental analyze-and-fix approach.
+        </p>
+        
+        <h4 class="u-accent pin">Results</h4>
+        <p>Supervision software made more <span class="mark">robust</span> for operators (fewer errors and better consistency of machine data).</p>
+        <p><span class="mark">Effective deployment</span> of the energy collection software, enabling automated and usable data reporting.</p>
+        <p>Contribution to the <span class="mark">Industry 4.0 strategy</span> and to the 2030 carbon footprint reduction objectives of the Vélizy site.</p>
+      </article>
+    </div>
+
+    <div class="timeline timeline--rail fx-stagger">
+      <!-- Third experience -->
+      <article class="entry reveal">
+        <div class="when">Internship · Jun. 2022 – Aug. 2022 · Montrouge, FR</div>
+        <div class="where pin">Assistant, Business Engineering Team</div>
+        <div class="badge">CACEIS CA</div>
+        <!-- Illustrative image (optional) -->
+        <div class="media">
+          <div class="frame ar-land parallax" data-speed = "0.08">
+            <img src="../photo/caceis.jpg" alt="Office illustration" />
+          </div>
+        </div>
+        <h4 class="u-accent pin">Context</h4>
+        <p>CACEIS, a <strong>Crédit Agricole</strong> subsidiary specializing in financial services for institutional investors.<br> Based at the <span class="mark">headquarters</span> in Montrouge, I joined the <span class="mark">Business Engineering</span> team in charge of preparing and drafting files for <span class="mark">institutional clients.</span></p>
+        
+        <h4 class="u-accent pin">Problem</h4>
+        <p>The team had just deployed a new software, RFPdia, designed to <span class="mark">centralize</span> and <span class="mark">reuse</span> historical answers in order to gain efficiency and quality in the <span class="mark">production of future proposals.</span> <br>It still needed to be populated and organized to become fully operational.</p>
+                  
+        <h4 class="u-accent pin">Goal</h4>
+        <p>Contribute to the <span class="mark">deployment and adoption</span> of RFPdia by structuring existing data (past files) and optimizing their organization, so the team has a <span class="mark">rich, reusable base</span> when preparing future client proposals.</p>
+        
+        <h4 class="u-accent pin">Missions</h4>
+        <p>
+          Review and analyze <span class="mark">RFI/RFP</span> archives to sort, categorize, and import into RFPdia.<br><br>
+          Structure data to <span class="mark">maximize relevance</span> and <span class="mark">facilitate reuse.</span><br><br>
+          Participate in the <span class="mark">operational deployment</span> of RFPdia and support the Business Engineering team in its adoption.<br><br>
+          Draft minutes to follow up on meetings and <span class="mark">key decisions.</span><br><br>
+          Regular exchanges with teams abroad, strengthening my <span class="mark">cross-cultural communication</span> skills.<br>
+        </p>
+      </article>
+    </div>
+
+    <div class="timeline timeline--rail fx-stagger">
+      <!-- Fourth experience -->
+      <article class="entry reveal">
+        <div class="when">Since age 15</div>
+        <div class="where pin">Other professional experiences</div>
+        <div class="badge">+++</div>
+        <p>Alongside my studies, I’ve taken on various <span class="mark">summer and extra jobs</span> that helped me develop a strong <span class="mark">service mindset, versatility, and work ethic.</span> I worked in retail (<strong>Coccinelle Express</strong>), hospitality (<strong>Holiday Inn Paris Montmartre</strong>), real estate (<strong>CAFPI</strong>), as well as in catering and events during seasonal missions.<br><br>
+           These experiences—sometimes physically demanding or requiring high reactivity—taught me to <span class="mark">adapt quickly</span>, keep a positive attitude in <span class="mark">dynamic environments</span>, and always give my best. They echo the values I mentioned in my introduction: <span class="mark">rigor, responsibility, and perseverance.</span>
+        </p>
       </article>
     </div>
   </section>
 
-  <footer>© <span id="y"></span> Yamine</footer>
-  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <footer>© <span id="y"></span> Yamine Kasko - Pro Page</footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
   <script src="../assets/script.js"></script>
 </body>
 </html>
