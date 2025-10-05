@@ -282,49 +282,48 @@
     });
   })();
 
-    // Auto-hide du menu catégories avec hystérésis (pas de clignote)
+  // Auto-hide du menu catégories (mobile-friendly)
   (function(){
     const catNav = document.querySelector('.category-nav');
-    if(!catNav) return;
+    if (!catNav) return;
 
-    let lastY = window.scrollY || 0;
-    let baseY = lastY;
+    // ✅ lire le scroll sur le vrai root (fiable iOS/Android)
+    const root = document.scrollingElement || document.documentElement;
+    const getY  = () => (root.scrollTop || window.scrollY || 0);
+
+    let lastY  = getY();
+    let baseY  = lastY;
     let hidden = false;
-    const DOWN_HIDE_AFTER = 80;  // ne cache pas tant qu'on n'a pas dépassé 80px
-    const DOWN_TRAVEL     = 70;  // distance à parcourir en descendant avant hide
-    const UP_TRAVEL       = 45;  // distance à remonter avant show
-    const DELTA_MIN       = 3;   // ignore micro mouvements
+
+    // Seuils plus réactifs sur mobile
+    const DOWN_HIDE_AFTER = 20;  // ne cache pas tant qu'on n'a pas dépassé 20px
+    const DOWN_TRAVEL     = 40;  // distance à parcourir en descendant avant hide
+    const UP_TRAVEL       = 25;  // distance à remonter avant show
+    const DELTA_MIN       = 2;   // ignore micro-mouvements
 
     const show = () => { catNav.classList.remove('category-nav--hidden'); hidden = false; };
     const hide = () => { catNav.classList.add('category-nav--hidden');    hidden = true;  };
 
     const onScroll = () => {
-      const y  = window.scrollY || 0;
+      const y  = getY();
       const dy = y - lastY;
 
-      // toujours visible près du haut de page
+      // Toujours visible près du haut de page
       if (y < DOWN_HIDE_AFTER){
-        show();
-        baseY = y;
-        lastY = y;
-        return;
+        show(); baseY = y; lastY = y; return;
       }
 
-      // si on descend franchement
+      // Descente franche -> hide
       if (dy > DELTA_MIN && !hidden){
-        const traveled = y - baseY;
-        if (traveled > DOWN_TRAVEL){
-          hide();
-          baseY = y; // reset l’ancre
+        if (y - baseY > DOWN_TRAVEL){
+          hide(); baseY = y;
         }
       }
 
-      // si on remonte franchement
+      // Remontée franche -> show
       if (dy < -DELTA_MIN && hidden){
-        const traveled = baseY - y;
-        if (traveled > UP_TRAVEL){
-          show();
-          baseY = y; // reset l’ancre
+        if (baseY - y > UP_TRAVEL){
+          show(); baseY = y;
         }
       }
 
@@ -333,15 +332,21 @@
 
     // RAF + passive pour perf
     let ticking = false;
-    window.addEventListener('scroll', () => {
-      if(!ticking){
+    const handler = () => {
+      if (!ticking){
         requestAnimationFrame(() => { onScroll(); ticking = false; });
         ticking = true;
       }
-    }, { passive:true });
+    };
 
-    // toujours montrer sur resize/orientationchange
+    // 👇 attache sur window ET sur le root (certains mobiles ne déclenchent que l’un des deux)
+    window.addEventListener('scroll', handler, { passive:true });
+    root.addEventListener('scroll', handler, { passive:true });
+
+    // Remet au propre sur resize/orientation
     ['resize','orientationchange','pageshow','visibilitychange'].forEach(ev=>{
-      window.addEventListener(ev, () => { show(); baseY = window.scrollY || 0; lastY = baseY; }, { passive:true });
+      window.addEventListener(ev, () => {
+        show(); baseY = getY(); lastY = baseY;
+      }, { passive:true });
     });
   })();

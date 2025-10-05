@@ -644,8 +644,11 @@
   }
   .uni-section.is-active { display: block; opacity: 1; }
   .uni-wrap    { max-width: 1100px; margin: 0 auto; }
-  .uni-head {
-    display:flex; align-items:flex-end; justify-content:space-between; gap:10px;
+  .uni-head{
+    display: flex;
+    flex-direction: column;      /* ← titre au-dessus */
+    align-items: flex-start;
+    gap: 6px;
     margin-bottom: 12px;
   }
   .uni-title { margin: 0; font-size: clamp(22px, 5vw, 28px); line-height:1.15; }
