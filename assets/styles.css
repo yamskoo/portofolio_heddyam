@@ -779,49 +779,48 @@
     scroll-margin-top: 12px !important;
   }
 
-  /* === CENTER EVERYTHING DEAD-CENTER (landing only, mobile) === */
+  /* === Landing fix: side-by-side, slightly above center, tidy logos === */
   @media (max-width: 600px){
+    /* Centre l’ensemble puis remonte légèrement le bloc */
     body.page-landing .container.center.language{
-      /* hauteur fiable + vrai centrage vertical */
-      min-height: 100svh !important;   /* iOS/Android modernes */
-      min-height: 100vh  !important;   /* fallback */
+      min-height: 100svh !important;
       display: flex !important;
       flex-direction: column !important;
       align-items: center !important;
-      justify-content: center !important;   /* ⬅️ au MILIEU */
-      text-align: center !important;
-
-      /* on laisse le layout respirer avec un gap régulier */
+      justify-content: center !important;   /* centre vertical */
       gap: 18px !important;
-
-      /* on supprime toute poussée parasite */
-      padding-top: 0 !important;
-      margin: 0 !important;
+      transform: translateY(-4vh) !important;/* ⬅️ remonte un peu (ajuste -2vh à -6vh) */
     }
 
-    /* neutraliser les marges qui tirent le haut/bas */
-    body.page-landing .title{ margin: 0 !important; }
-    body.page-landing .subtitle{ margin: 0 !important; }
-
-    /* grille langues : centrée, sans marge externe */
+    /* Cartes langues : 2 colonnes (côte à côte) */
     body.page-landing .lang-grid{
-      margin: 0 !important;
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;  /* ✅ côte à côte */
       gap: 14px !important;
       width: 100% !important;
       max-width: 720px !important;
+      margin: 0 !important;
+    }
+    body.page-landing .card.lang{
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 10px !important;
+      min-height: 60px !important;
+      text-align: center !important;
     }
 
-    /* logos : même taille, pas de marge qui casse le centrage */
+    /* Logos : ligne de 3, même taille, sans cadre */
     body.page-landing .logo-row{
-      margin: 0 !important;                /* ⬅️ pas d’espace externe */
-      width: 100% !important;
-      max-width: 720px !important;
       display: grid !important;
       grid-template-columns: repeat(3, 1fr) !important;
       gap: 12px !important;
+      width: 100% !important;
+      max-width: 720px !important;
+      margin: 0 !important;
     }
     body.page-landing .logo{
-      height: 56px !important;             /* ⬅️ même taille (réduit) */
+      height: 56px !important;            /* ⬅️ taille uniforme (mets 52/60 si tu veux) */
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
