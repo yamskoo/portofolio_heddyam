@@ -792,9 +792,9 @@
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: center !important;   /* ✅ centre vertical */
+    justify-content: flex-start !important;   /* ✅ centre vertical */
     text-align: center !important;
-    padding-top: 0 !important;
+    padding-top: 6vh !important;
     gap: 14px !important;
     margin: 0 auto !important;
     width: 100% !important;
@@ -807,7 +807,7 @@
   }
 
   body.page-landing .subtitle{
-    margin: 4px 0 10px 0 !important;
+    margin: 8px !important;
   }
 
   /* Boutons langue : centrés, contenus */
@@ -839,6 +839,7 @@
     width: 100% !important;
     max-width: 720px !important;
     margin: 10px auto 0 auto !important;
+    margin-top: 26px !important; 
   }
   body.page-landing .logo{
     height: 72px !important;                 /* ajuste à 80px si tu veux + grand */
