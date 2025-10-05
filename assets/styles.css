@@ -742,4 +742,37 @@
     .p-desc  { font-size: 13.5px; }
     .robafis-card .left h1 { font-size: 22px; }
   }
+  
+  /* === Page Universitaire : tout reste visible (pas d'auto-hide) === */
+  .page-universitaire .category-nav{
+    position: sticky;
+    top: var(--nav-h);                /* sous le header */
+    z-index: 60;
+  }
+  .page-universitaire .category-nav--hidden{
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Titre collé sous la barre catégories pendant le scroll */
+  .page-universitaire .uni-head{
+    position: sticky;
+    top: calc(var(--nav-h) + var(--cat-h, 52px));   /* header + hauteur nav catégories */
+    z-index: 50;
+    background: rgba(10,10,20,.75);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    padding: 8px 0;
+    margin-bottom: 12px;
+  }
+
+  /* un peu d'air pour le contenu quand le titre est sticky */
+  .page-universitaire .uni-wrap{ padding-top: 6px; }
+
+  /* les ancres compensent header + nav + titre */
+  .page-universitaire .uni-section[id]{
+    scroll-margin-top: calc(var(--nav-h) + var(--cat-h, 52px) + 12px);
+  }
+
 

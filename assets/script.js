@@ -116,22 +116,21 @@
     }, { passive: false });
   })();
 
-  // Expose la hauteur réelle du header sticky à CSS via --nav-h
+  // Expose la hauteur de la barre catégories via --cat-h (utile pour .uni-head sticky)
   (function(){
-    const nav = document.querySelector('.nav');
-    if(!nav) return;
+    const bar = document.querySelector('.category-nav');
+    if(!bar) return;
     const set = () => {
-      const h = nav.getBoundingClientRect().height;
-      document.documentElement.style.setProperty('--nav-h', h + 'px');
+      const h = bar.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--cat-h', h + 'px');
     };
     set();
-    window.addEventListener('resize', set);
-    window.addEventListener('orientationchange', set);
-    window.addEventListener('pageshow', set);
-    window.addEventListener('visibilitychange', set);
-    window.addEventListener('load', set);
+    window.addEventListener('resize', set, {passive:true});
+    window.addEventListener('orientationchange', set, {passive:true});
+    window.addEventListener('pageshow', set, {passive:true});
+    window.addEventListener('load', set, {passive:true});
   })();
-   
+
   // Mobile menu toggle (hamburger)
   (function(){
     const btn = document.querySelector('.hamburger');
@@ -284,6 +283,7 @@
 
   // Auto-hide du menu catégories (mobile-friendly)
   (function(){
+    if (document.body.classList.contains('page-universitaire')) return;
     const catNav = document.querySelector('.category-nav');
     if (!catNav) return;
 
