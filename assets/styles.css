@@ -800,7 +800,7 @@
       width: 100% !important;
       max-width: 720px !important;
       margin: 0 !important;
-      margin-bottom: 24px !important; 
+      margin-bottom: 48px !important; 
     }
     body.page-landing .card.lang{
       display: flex !important;
@@ -819,7 +819,7 @@
       width: 100% !important;
       max-width: 720px !important;
       margin: 0 !important;
-      margin-top: 4px !important;
+      margin-top: 8px !important;
     }
     body.page-landing .logo{
       height: 56px !important;            /* ⬅️ taille uniforme (mets 52/60 si tu veux) */
