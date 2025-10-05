@@ -820,7 +820,7 @@
       margin: 0 !important;
     }
     body.page-landing .logo{
-      height: 52px !important;            /* ⬅️ taille uniforme (mets 52/60 si tu veux) */
+      height: 56px !important;            /* ⬅️ taille uniforme (mets 52/60 si tu veux) */
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
