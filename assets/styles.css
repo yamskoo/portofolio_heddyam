@@ -779,75 +779,82 @@
     scroll-margin-top: 12px !important;
   }
 
-  /* ===== Page d'accueil langue (centrée) ===== */
-  .page-landing .container.center.language{
-    min-height: 100vh;
-    display: flex;                 /* déjà présent via .center, on renforce ici */
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;       /* ✅ centre verticalement */
-    text-align: center;
-    padding-top: 0;                /* retire la marge haute */
-    gap: 14px;
+ /* ===== Landing mobile fix (force centre + vrais vh mobiles) ===== */
+  body.page-landing,
+  body.page-landing html { height: 100%; }
+
+  body.page-landing .container.center.language{
+    /* vh fiables sur mobile */
+    min-height: 100svh !important;   /* iOS/Android modernes */
+    min-height: 100dvh !important;   /* fallback moderne */
+    min-height: 100vh  !important;   /* vieux navigateurs */
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;   /* ✅ centre vertical */
+    text-align: center !important;
+    padding-top: 0 !important;
+    gap: 14px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
   }
 
-  .page-landing .title{
-    margin-top: 0;
-    font-size: clamp(28px, 8vw, 40px);
-    line-height: 1.1;
+  body.page-landing .title{
+    font-size: clamp(32px, 9vw, 44px) !important;
+    line-height: 1.1 !important;
+    margin: 0 !important;
   }
 
-  .page-landing .subtitle{
-    margin: 2px 0 10px 0;
+  body.page-landing .subtitle{
+    margin: 4px 0 10px 0 !important;
   }
 
-  /* Cartes langue : contenu bien centré + drapeau */
-  .page-landing .lang-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    width: 100%;
-    max-width: 720px;
+  /* Boutons langue : centrés, contenus */
+  body.page-landing .lang-grid{
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 14px !important;
+    width: 100% !important;
+    max-width: 720px !important;
+    margin: 0 auto !important;
   }
-
-  .page-landing .card.lang{
-    display: flex;
-    align-items: center;
-    justify-content: center;       /* ✅ centre le texte dans la boîte */
-    gap: 10px;
-    min-height: 60px;
-    padding: 12px 14px;
-    text-align: center;
+  body.page-landing .card.lang{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    min-height: 60px !important;
+    padding: 12px 14px !important;
+    text-align: center !important;
   }
+  body.page-landing .card.lang .flag{ font-size: 20px !important; line-height: 1 !important; }
+  body.page-landing .card.lang .label{ font-weight: 700 !important; font-size: 16px !important; }
 
-  .page-landing .card.lang .flag{ font-size: 20px; line-height: 1; }
-  .page-landing .card.lang .label{ font-weight: 700; font-size: 16px; }
-
-  /* Logos : même taille, SANS boîtes */
-  .page-landing .logo-row{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    width: 100%;
-    max-width: 720px;
-    margin-top: 10px;
+  /* Logos : SANS boîtes, même taille visuelle */
+  body.page-landing .logo-row{
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 720px !important;
+    margin: 10px auto 0 auto !important;
   }
-
-  .page-landing .logo{
-    height: 72px;                  /* même hauteur pour tous */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* ❌ plus de boîte : */
-    background: transparent;
-    border: 0;
+  body.page-landing .logo{
+    height: 72px !important;                 /* ajuste à 80px si tu veux + grand */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
   }
-
-  .page-landing .logo img{
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;           /* jamais rogné */
-    padding: 0;                    /* pas d’encadrement visuel */
+  body.page-landing .logo img{
+    display: block !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;          /* jamais rogné */
+    padding: 0 !important;
   }
