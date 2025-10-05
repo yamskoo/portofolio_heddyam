@@ -225,3 +225,37 @@
     });
   })();
 
+  // Année du footer (sécurité si ton global ne l'a pas déjà fait ici)
+  (function(){
+    var y = document.getElementById('y');
+    if (y) y.textContent = new Date().getFullYear();
+  })();
+
+  // Activer la pastille du menu selon la section visible
+  (function(){
+    const chips = Array.from(document.querySelectorAll('.category-nav a.chip'));
+    if (!chips.length) return;
+
+    const sections = chips
+      .map(c => document.querySelector(c.getAttribute('href')))
+      .filter(Boolean);
+
+    const setActive = (hash) => {
+      chips.forEach(c => c.classList.toggle('is-active', c.getAttribute('href') === hash));
+    };
+
+    const io = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b)=> b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      setActive('#' + visible.target.id);
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: [0, .2, .4, .6, .8, 1] });
+
+    sections.forEach(s => io.observe(s));
+
+    // Quand on clique une chip, on met à jour l'état actif tout de suite (feedback instantané)
+    chips.forEach(c => c.addEventListener('click', () => setActive(c.getAttribute('href'))));
+  })();
+
+
