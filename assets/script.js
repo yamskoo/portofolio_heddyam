@@ -351,19 +351,4 @@
     });
   })();
 
-  /* ===============================
-   Landing (index) — page-only JS
-   S'exécute uniquement si body.page-landing est présent
-   =============================== */
-  (function(){
-    if (!document.body.classList.contains('page-landing')) return;
-
-    // Petit feedback visuel au tap (optionnel, non intrusif)
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.style.transform = 'scale(0.985)';
-        setTimeout(() => { btn.style.transform = ''; }, 120);
-      }, { passive: true });
-    });
-  })();
 

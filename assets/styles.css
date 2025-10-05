@@ -779,112 +779,78 @@
     scroll-margin-top: 12px !important;
   }
 
-  /* ===============================
-    Landing (index) — page-only CSS
-    Scope: body.page-landing
-    =============================== */
-
-  body.page-landing,
-  body.page-landing html { height: 100%; }
-
-  .page-landing .landing-screen{
+  /* ===== Page d'accueil langue (scopé) ===== */
+  .page-landing .container.center.language{
+    /* on ne centre plus verticalement : on colle en haut */
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;       /* Titre en haut, logos en bas */
-    padding: 16px 14px 10px;
-    box-sizing: border-box;
+    justify-content: flex-start;
+    padding-top: 10px;            /* marge réduite en haut */
     gap: 12px;
   }
 
-  /* TOP */
-  .page-landing .landing-top{ padding-top: 4px; }
-  .page-landing .landing-title{
-    /* 🔥 plus grand et prioritaire */
-    font-size: clamp(28px, 9vw, 42px);
-    font-weight: 800;
-    margin: 0;
-    line-height: 1.12;
-    letter-spacing: .2px;
-  }
-  .page-landing .landing-subtitle{
-    font-size: 13.5px;
-    opacity: .9;
-    margin: 6px 0 0 0;
+  .page-landing .title{
+    margin-top: 4px;              /* titre plus proche du bord */
+    font-size: clamp(28px, 8vw, 40px);
+    line-height: 1.1;
   }
 
-  /* LANG CHOICES — vrais boîtiers (pills) bien visibles */
-  .page-landing .landing-lang{
+  .page-landing .subtitle{
+    margin: 4px 0 10px 0;
+  }
+
+  /* Cartes langue : contenu centré + drapeau */
+  .page-landing .lang-grid{
     display: grid;
-    grid-template-columns: 1fr 1fr;       /* côte à côte */
-    gap: 12px;
-    margin-top: 12px;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    width: 100%;
+    max-width: 720px;
   }
-  .page-landing .lang-btn{
-    /* boîtiers solides, non impactés par les styles “card” globaux */
-    display: inline-flex;
+
+  .page-landing .card.lang{
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 14px 16px;
-    border-radius: 14px;
-    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-    border: 1.25px solid rgba(255,255,255,.16);
-    text-decoration: none;
-    color: #fff;
-    font-weight: 700;
-    font-size: 16px;                      /* 🔥 plus lisible */
-    min-height: 52px;                     /* confort tactile */
-    box-shadow: 0 10px 28px rgba(0,0,0,.35);
-    transition: transform .15s ease, border-color .2s ease, box-shadow .2s ease;
+    text-align: center;
+    min-height: 60px;             /* taille homogène */
+    padding: 12px 14px;
   }
-  .page-landing .lang-btn:hover{
-    border-color: rgba(124,58,237,.45);
-    box-shadow: 0 14px 36px rgba(0,0,0,.45);
-  }
-  .page-landing .lang-btn:active{ transform: scale(.985); }
-  .page-landing .flag{ font-size: 20px; line-height: 1; }
-  .page-landing .lang-label{ display:inline-block; }
 
-  /* LOGOS — réguliers quel que soit le format (PNG/JPG/WEBP/SVG) */
-  .page-landing .landing-logos{
+  .page-landing .card.lang .flag{
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .page-landing .card.lang .label{
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  /* Logos : même taille, côte à côte, non rognés */
+  .page-landing .logo-row{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    /* on évite le scroll : bloc compact en bas */
-    margin-top: 8px;
+    width: 100%;
+    max-width: 720px;
+    margin-top: 14px;
   }
+
   .page-landing .logo{
-    aspect-ratio: 1 / 1;                  /* carré strict pour l’alignement */
-    border-radius: 12px;
-    background: #0b0d11;                  /* fond propre */
+    height: 72px;                 /* même hauteur pour tous */
+    border-radius: 10px;
     border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.05);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
   }
-  .page-landing .logo img{
-    /* le logo n'est JAMAIS rogné, toujours centré */
-    max-width: 86%;
-    max-height: 86%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    /* petit padding optique pour les logos “pleins” */
-    padding: 6%;
-    display: block;
-  }
 
-  /* Ajustements très petits écrans (hauteurs réduites) */
-  @media (max-height: 640px){
-    .page-landing .landing-title{ font-size: clamp(26px, 8.2vw, 36px); }
-    .page-landing .lang-btn{ min-height: 48px; padding: 12px 14px; font-size: 15px; }
-    .page-landing .logo img{ max-width: 82%; max-height: 82%; padding: 5%; }
-  }
-  /* Petites largeurs */
-  @media (max-width: 360px){
-    .page-landing .landing-title{ font-size: clamp(24px, 9.5vw, 34px); }
-    .page-landing .landing-subtitle{ font-size: 12.5px; }
-    .page-landing .lang-btn{ font-size: 14.5px; }
+  .page-landing .logo img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;          /* jamais rogné */
+    padding: 10px;                /* équilibre visuel */
   }
