@@ -779,50 +779,48 @@
     scroll-margin-top: 12px !important;
   }
 
- /* ===== Landing mobile fix (force centre + vrais vh mobiles) ===== */
-  body.page-landing,
-  body.page-landing html { height: 100%; }
-
+  /* === Landing fixes (mobile) : centrage titre + espaces contrôlés === */
   body.page-landing .container.center.language{
-    /* vh fiables sur mobile */
-    min-height: 100svh !important;   /* iOS/Android modernes */
-    min-height: 100dvh !important;   /* fallback moderne */
-    min-height: 100vh  !important;   /* vieux navigateurs */
-
+    min-height: 100svh !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: flex-start !important;   /* ✅ centre vertical */
+    justify-content: flex-start !important;
+    /* on neutralise le gap pour garder la main sur les espacements */
+    gap: 0 !important;
+    padding-top: 6vh !important;  /* titre un peu plus haut */
+  }
+
+  body.page-landing .title,
+  body.page-landing .subtitle{
     text-align: center !important;
-    padding-top: 6vh !important;
-    gap: 14px !important;
-    margin: 0 auto !important;
     width: 100% !important;
   }
 
   body.page-landing .title{
     font-size: clamp(32px, 9vw, 44px) !important;
     line-height: 1.1 !important;
-    margin: 0 !important;
+    margin: 0 0 6px 0 !important;  /* petit espace sous le titre */
   }
 
   body.page-landing .subtitle{
-    margin: 8px !important;
+    margin: 0 0 16px 0 !important; /* espace sous le sous-titre */
   }
 
-  /* Boutons langue : centrés, contenus */
+  /* cartes langues : bloc compact + marge basse explicite */
   body.page-landing .lang-grid{
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     gap: 14px !important;
     width: 100% !important;
     max-width: 720px !important;
-    margin: 0 auto !important;
+    margin: 0 0 28px 0 !important; /* ← espace ENTRE langues et logos */
   }
+
   body.page-landing .card.lang{
     display: flex !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: center !important;   /* texte bien centré */
     gap: 10px !important;
     min-height: 60px !important;
     padding: 12px 14px !important;
@@ -831,18 +829,17 @@
   body.page-landing .card.lang .flag{ font-size: 20px !important; line-height: 1 !important; }
   body.page-landing .card.lang .label{ font-weight: 700 !important; font-size: 16px !important; }
 
-  /* Logos : SANS boîtes, même taille visuelle */
+  /* logos : même taille, sans boîtes */
   body.page-landing .logo-row{
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 12px !important;
     width: 100% !important;
     max-width: 720px !important;
-    margin: 10px auto 0 auto !important;
-    margin-top: 26px !important; 
+    margin: 0 !important; /* l'espace au-dessus est géré par .lang-grid */
   }
   body.page-landing .logo{
-    height: 72px !important;                 /* ajuste à 80px si tu veux + grand */
+    height: 72px !important;           /* passe à 80px si tu veux plus grand */
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -851,11 +848,10 @@
     box-shadow: none !important;
   }
   body.page-landing .logo img{
-    display: block !important;
     max-width: 100% !important;
     max-height: 100% !important;
     width: auto !important;
     height: auto !important;
-    object-fit: contain !important;          /* jamais rogné */
-    padding: 0 !important;
+    object-fit: contain !important;
   }
+
