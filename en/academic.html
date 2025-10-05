@@ -4,14 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Academic Projects · Yamine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/styles.css" />
 </head>
-<body>
+<body class="page-universitaire">
   <header class="nav">
-    <div class="brand"><span class="dot"></span> Yamine · Portfolio</a></div>
-
+    <div class="brand"><span class="dot"></span> Yamine · Portfolio</div>
     <button class="hamburger" aria-controls="main-menu" aria-expanded="false" aria-label="Open menu">☰</button>
-
     <nav id="main-menu" class="menu">
       <a href="index.html">Home</a>
       <a href="whoami.html">About me</a>
@@ -20,40 +21,283 @@
       <a href="../fr/universitaire.html">FR</a>
     </nav>
   </header>
-  <section class="section reveal">
-    <h2 class="glow">Academic Projects</h2>
-    <p>Robotics, ROS2, Unity, CI/CD, PLM and data projects that shaped my engineering profile.</p>
 
-    <div class="timeline">
-      <article class="entry">
-        <div class="where">RobAFIS (2024 & 2025) — 4th place</div>
-        <div class="when">National robotics contest</div>
-        <ul>
-          <li>Autonomous robots (binary computation, waste sorting), requirements analysis and technical architecture.</li>
-          <li>Documentation, testing, and field deployment.</li>
-        </ul>
-      </article>
+  <!-- Category navigation -->
+  <nav class="category-nav">
+    <div class="category-nav__inner">
+      <a class="chip is-active" href="#robafis">RobAFIS</a>
+      <a class="chip" href="#robotique">Embedded Systems</a>
+      <a class="chip" href="#plm">PLM &amp; Supply Chain</a>
+      <a class="chip" href="#dev">Dev &amp; AI</a>
+      <a class="chip" href="#these">Memo</a>
+      <a class="chip" href="#pix">PIX</a>
+    </div>
+  </nav>
 
-      <article class="entry">
-        <div class="where">Robotics Simulation — TurtleBot3 & UR5e</div>
-        <div class="when">C++, ROS2</div>
-        <ul>
-          <li>Autonomous navigation and manipulation scenarios; simulation-first approach.</li>
-        </ul>
-      </article>
-
-      <article class="entry">
-        <div class="where">Industrial software & data</div>
-        <div class="when">Unity 2D/VR, SQL, detection models</div>
-        <ul>
-          <li>Combining AI, game engines, and data systems to deliver interactive demos and tools.</li>
-        </ul>
-      </article>
+  <!-- RobAFIS highlight -->
+  <section id="robafis" class="robafis-hero uni-section is-active">
+    <div class="robafis-wrap">
+      <div class="robafis-card">
+        <div class="left">
+          <h1 class="glow">National Robotics Competition · RobAFIS</h1>
+          <p class="uni-kicker">French Association for Systems Engineering</p>
+          <p>
+            AFIS, an affiliate member of the <strong>I</strong>nternational <strong>C</strong>ouncil on <strong>S</strong>ystems <strong>E</strong>ngineering (INCOSE), has brought together major industrial players since 1998 around best practices in <span class="mark">systems engineering</span>.<br><br>
+            The <strong>RobAFIS</strong> competition challenges teams to design a <span class="mark">complete robotic system</span> that meets a <span class="mark">given requirements brief</span>. Each team delivers a solution spanning <span class="mark">hardware, software, and human factors</span>, applying systems engineering methods across the <span class="mark">entire project lifecycle</span>.<br><br>
+            The final evaluates both the <span class="mark">quality of the design dossier</span> and the <span class="mark">operational performance of the robot</span>.<br><br>
+            These are the two editions I took part in:
+          </p>
+          <ul class="robafis-bullets">
+            <li><strong>2024:</strong> Robot performing <span class="mark">binary calculations</span> and displaying the result with tokens.</li>
+            <li><strong>2025:</strong> Robot for <span class="mark">waste sorting and transport</span> within a time limit.<br><br></li>
+          </ul>
+          <div class="robafis-badges">
+            <span class="robafis-badge">Qt</span>
+            <span class="robafis-badge">C++</span>
+            <span class="robafis-badge">HMI</span>
+            <span class="robafis-badge">V&V</span>
+            <span class="robafis-badge">Systems</span>
+            <span class="robafis-badge">BLE</span>
+          </div>
+        </div>
+        <div class="media">
+          <div class="frame ar-port">
+            <img src="../photo/comptrobot.jpg" alt="RobAFIS competition — robot in action" />
+          </div>
+        </div>
+        <p>
+          Our team achieved <span class="mark">4th place</span> among about ten French engineering schools (including <strong>ENSA</strong>, <strong>CY Tech</strong> and <strong>ISAE-Supméca</strong>).  
+          It was an <span class="mark">immersive systems engineering</span> experience, combining rigor, creativity and teamwork.
+        </p>
+        <p>
+          I appreciated the balance between the <span class="mark">technical side</span>—robot design and programming— 
+          and the <span class="mark">methodological side</span>—a complete, professional design dossier.
+        </p>
+        <div class="media">
+          <div class="frame ar-port">
+            <img src="../photo/listbot.jpg" alt="RobAFIS competition — robot in action" />
+          </div>
+        </div>
+        <p>
+          In the <strong>first edition</strong>, I contributed to the <span class="mark">robot design</span> and the dossier.  
+          In the <strong>second edition</strong>, as <span class="mark">team lead</span>, I coordinated the project,  
+          with strong involvement in the <span class="mark">design dossier</span> and the <span class="mark">HMI</span>.
+        </p>
+        <p>
+          This journey strengthened my <span class="mark">technical</span> and <span class="mark">organizational</span> skills,  
+          while developing real <span class="mark">leadership</span> and <span class="mark">team spirit</span>.
+        </p>
+        <div class="media">
+          <div class="frame ar-land">
+            <img src="../photo/ihm.jpg" alt="RobAFIS competition — HMI" />
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <footer>© <span id="y"></span> Yamine</footer>
-  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <!-- Robotics & embedded systems -->
+  <section id="robotique" class="uni-section">
+    <div class="uni-wrap">
+      <div class="uni-head">
+        <h2 class="uni-title u-glow">Embedded Systems</h2>
+        <p class="uni-kicker">Prototypes, control, simulation & mechatronics</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/turtle.jpg" alt="TurtleBot3 joystick control" /></div>
+          <div class="p-body">
+            <h3 class="p-title">ROS2 · TurtleBot3 Control</h3>
+            <p class="p-desc"> Real-time control of TurtleBot3 with a joystick using ROS2 nodes and QoS mechanisms. Tested in Gazebo simulation, then deployed on the physical robot.</p>
+          </div>
+          <div class="p-tags"><span class="tag">ROS2</span><span class="tag">Nodes</span><span class="tag">Ubuntu</span><span class="tag">Python</span><span class="tag">Gazebo</span></div>
+        </article>
+
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/ur5e.jpeg" alt="UR5e arm simulation" /></div>
+          <div class="p-body">
+            <h3 class="p-title">Cobot · UR5e Simulation</h3>
+            <p class="p-desc">UR5e kinematics study: joint-axis calculations, forward/inverse kinematics, and trajectory generation in Matlab. Final simulation of motion and object grasping in a virtual environment.</p>
+          </div>
+          <div class="p-tags"><span class="tag">UR5e</span><span class="tag">Simulation</span><span class="tag">Matlab</span></div>
+        </article>
+
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/lune2.jpg" alt="Water level regulation" /></div>
+          <div class="p-body">
+            <h3 class="p-title">Mechatronics</h3>
+            <p class="p-desc">Water-level regulation system with sensors, actuators and control law. Pumps automatically stabilize the level by filling or draining the tank per the setpoint, with experimental validation.</p>
+          </div>
+          <div class="p-tags"><span class="tag">C++</span><span class="tag">Sensors</span><span class="tag">Arduino</span></div>
+        </article>
+
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/lune.jpg" alt="C++ autonomous robot" /></div>
+          <div class="p-body">
+            <h3 class="p-title">C++ · 180° Autonomous Robot</h3>
+            <p class="p-desc">Obstacle avoidance with 180° rotations: state logic and timers in C++.</p>
+          </div>
+          <div class="p-tags"><span class="tag">C++</span><span class="tag">Autonomy</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLM / Supply Chain / Industry -->
+  <section id="plm" class="uni-section">
+    <div class="uni-wrap">
+      <div class="uni-head">
+        <h2 class="uni-title u-glow">PLM, Supply Chain & Industry</h2>
+        <p class="uni-kicker">Product data structuring, logistics & MRP</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/plm2.png" alt="PLM solution" /></div>
+          <div class="p-body">
+            <h3 class="p-title">PLM · Data Structuring</h3>
+            <p class="p-desc">Data models, lifecycles, versioning and workflows.</p>
+          </div>
+          <div class="p-tags"><span class="tag">PLM</span><span class="tag">BOM</span><span class="tag">Workflows</span><span class="tag">Javascript</span><span class="tag">CSS</span></div>
+        </article>
+
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/supply.png" alt="Supply Chain report" /></div>
+          <div class="p-body">
+            <h3 class="p-title">Supply Chain · Report</h3>
+            <p class="p-desc">Company analysis: logistics, SCM, MRP. Optimization recommendations & KPIs.</p>
+          </div>
+          <div class="p-tags"><span class="tag">SCM</span><span class="tag">MRP</span><span class="tag">KPI</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Software Dev & AI -->
+  <section id="dev" class="uni-section">
+    <div class="uni-wrap">
+      <div class="uni-head">
+        <h2 class="uni-title u-glow">Software Development & Artificial Intelligence</h2>
+        <p class="uni-kicker">Games, AI, data & apps</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/vr.png" alt="Unity VR & 2D" /></div>
+          <div class="p-body">
+            <h3 class="p-title">Unity · VR, 3D & 2D Game</h3>
+            <p class="p-desc">Gameplay, scenes, controls and interactions in C#.</p>
+          </div>
+          <div class="p-tags"><span class="tag">Unity</span><span class="tag">VR</span><span class="tag">C#</span><span class="tag">OOP</span><span class="tag">Game design</span></div>
+        </article>
+
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/ia.jpg" alt="AI object recognition" /></div>
+          <div class="p-body">
+            <h3 class="p-title">AI · Object Recognition</h3>
+            <p class="p-desc">Using Edge Impulse to train and deploy an object-detection model on a Raspberry Pi.</p>
+          </div>
+          <div class="p-tags"><span class="tag">Raspberry</span><span class="tag">Python</span><span class="tag">Linux</span></div>
+        </article>
+
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/solid.jpg" alt="SolidWorks" /></div>
+          <div class="p-body">
+            <h3 class="p-title">SolidWorks · Instruments & Stage</h3>
+            <p class="p-desc">CAD for instruments and a stage scene (assemblies, renders).</p>
+          </div>
+          <div class="p-tags"><span class="tag">CAD</span><span class="tag">SolidWorks</span></div>
+        </article>
+
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/bellefleur.jpg" alt="SQL shop" /></div>
+          <div class="p-body">
+            <h3 class="p-title">SQL · Shop & Interface</h3>
+            <p class="p-desc">Relational model, constraints/keys, CRUD and views.</p>
+          </div>
+          <div class="p-tags"><span class="tag">SQL</span><span class="tag">DB</span></div>
+        </article>
+
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/scrabble.jpg" alt="C# Scrabble" /></div>
+          <div class="p-body">
+            <h3 class="p-title">C# · Scrabble (OOP)</h3>
+            <p class="p-desc">OOP implementation: board, draws, dictionary, scoring.</p>
+          </div>
+          <div class="p-tags"><span class="tag">C#</span><span class="tag">OOP</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Thesis / Memo -->
+  <section id="these" class="uni-section">
+    <div class="uni-wrap">
+      <div class="uni-head">
+        <h2 class="uni-title u-glow">Robotization of Law Enforcement</h2>
+        <p class="uni-kicker">Ethics, legitimacy & social acceptability</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/police.webp" alt="Police, robots & AI — issues" /></div>
+          <div class="p-body">
+            <h3 class="p-title">Synthesis</h3>
+            <p class="p-desc">
+              Study of robots & AI in policing: benefits (safety, efficiency),
+              risks (bias, surveillance, dehumanization) and conditions for responsible adoption. <br><br>
+              Method: international cases + field survey (citizens & pros). <br><br> Result: <em>conditional buy-in</em>
+              if transparency, data protection and continuous human oversight are ensured.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIX -->
+  <section id="pix" class="uni-section">
+    <div class="uni-wrap">
+      <div class="uni-head">
+        <h2 class="uni-title u-glow">PIX · Imagination & Exploration Project</h2>
+        <p class="uni-kicker">Design, creativity, teamwork</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/pix2.jpg" alt="Wind turbine recycled materials" /></div>
+          <div class="p-body">
+            <h3 class="p-title">PIX 1 · Wind Turbine</h3>
+            <p class="p-desc">Wind turbine built from recycled materials, capable of generating power.</p>
+          </div>
+          <div class="p-tags"><span class="tag">Energy</span><span class="tag">Upcycling</span><span class="tag">Electricity</span></div>
+        </article>
+
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/pix1.jpg" alt="Mechanical instrument melody" /></div>
+          <div class="p-body">
+            <h3 class="p-title">PIX 2 · Mechanical Instrument</h3>
+            <p class="p-desc">Mechanical device producing a melody with five distinct sounds.</p>
+          </div>
+          <div class="p-tags"><span class="tag">Servo Motor</span><span class="tag">Design</span><span class="tag">Arduino</span></div>
+        </article>
+
+        <article class="p-card">
+          <div class="p-media"><img src="../photo/moa.jpg" alt="Collaborative project" /></div>
+          <div class="p-body">
+            <h3 class="p-title">PIX 3 · Collaborative Project</h3>
+            <p class="p-desc">Team project applying MOA/MOE principles: objectives, planning, deliverables.</p>
+          </div>
+          <div class="p-tags"><span class="tag">MOA/MOE</span><span class="tag">Team</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer>© <span id="y"></span> Yamine Kasko — University Page</footer>
+
+  <!-- Existing global JS -->
   <script src="../assets/script.js"></script>
 </body>
 </html>
