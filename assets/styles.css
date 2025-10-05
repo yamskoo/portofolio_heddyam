@@ -779,32 +779,61 @@
     scroll-margin-top: 12px !important;
   }
 
-  /* === MOBILE QUICK FIXES (only landing) === */
-  @media (max-width: 600px) {
-    /* 1) Descendre le titre (augmente la valeur si tu le veux encore plus bas) */
-    body.page-landing .container.center.language {
-      justify-content: flex-start !important;
-      padding-top: 14vh !important;   /* ← mets 12–18vh selon ton goût */
-      gap: 0 !important;              /* on gère les espaces nous-mêmes */
+  /* === CENTER EVERYTHING DEAD-CENTER (landing only, mobile) === */
+  @media (max-width: 600px){
+    body.page-landing .container.center.language{
+      /* hauteur fiable + vrai centrage vertical */
+      min-height: 100svh !important;   /* iOS/Android modernes */
+      min-height: 100vh  !important;   /* fallback */
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;   /* ⬅️ au MILIEU */
+      text-align: center !important;
+
+      /* on laisse le layout respirer avec un gap régulier */
+      gap: 18px !important;
+
+      /* on supprime toute poussée parasite */
+      padding-top: 0 !important;
+      margin: 0 !important;
     }
 
-    /* 2) Espace sous le sous-titre (facultatif) */
-    body.page-landing .subtitle {
-      margin: 0 0 16px 0 !important;
+    /* neutraliser les marges qui tirent le haut/bas */
+    body.page-landing .title{ margin: 0 !important; }
+    body.page-landing .subtitle{ margin: 0 !important; }
+
+    /* grille langues : centrée, sans marge externe */
+    body.page-landing .lang-grid{
+      margin: 0 !important;
+      gap: 14px !important;
+      width: 100% !important;
+      max-width: 720px !important;
     }
 
-    /* 3) Espace entre cartes langues et logos (augmente pour les pousser plus bas) */
-    body.page-landing .lang-grid {
-      margin: 0 0 34px 0 !important;  /* ← essaie 34–48px */
+    /* logos : même taille, pas de marge qui casse le centrage */
+    body.page-landing .logo-row{
+      margin: 0 !important;                /* ⬅️ pas d’espace externe */
+      width: 100% !important;
+      max-width: 720px !important;
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 12px !important;
     }
-
-    /* 4) Logos plus petits ET tous identiques */
-    body.page-landing .logo {
-      height: 56px !important;        /* ← ex : 56px (essaie 52/60 si besoin) */
+    body.page-landing .logo{
+      height: 56px !important;             /* ⬅️ même taille (réduit) */
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
     }
-
-    /* 5) (Option) encore plus bas : ajoute un marge au bloc logos */
-    body.page-landing .logo-row {
-      margin-top: 6px !important;     /* ↑ augmente si tu veux encore descendre */
+    body.page-landing .logo img{
+      max-width: 100% !important;
+      max-height: 100% !important;
+      width: auto !important;
+      height: auto !important;
+      object-fit: contain !important;
     }
   }
