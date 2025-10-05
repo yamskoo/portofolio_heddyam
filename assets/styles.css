@@ -779,26 +779,29 @@
     scroll-margin-top: 12px !important;
   }
 
-  /* ===== Page d'accueil langue (scopé) ===== */
+  /* ===== Page d'accueil langue (centrée) ===== */
   .page-landing .container.center.language{
-    /* on ne centre plus verticalement : on colle en haut */
     min-height: 100vh;
-    justify-content: flex-start;
-    padding-top: 10px;            /* marge réduite en haut */
-    gap: 12px;
+    display: flex;                 /* déjà présent via .center, on renforce ici */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;       /* ✅ centre verticalement */
+    text-align: center;
+    padding-top: 0;                /* retire la marge haute */
+    gap: 14px;
   }
 
   .page-landing .title{
-    margin-top: 4px;              /* titre plus proche du bord */
+    margin-top: 0;
     font-size: clamp(28px, 8vw, 40px);
     line-height: 1.1;
   }
 
   .page-landing .subtitle{
-    margin: 4px 0 10px 0;
+    margin: 2px 0 10px 0;
   }
 
-  /* Cartes langue : contenu centré + drapeau */
+  /* Cartes langue : contenu bien centré + drapeau */
   .page-landing .lang-grid{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -810,47 +813,41 @@
   .page-landing .card.lang{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center;       /* ✅ centre le texte dans la boîte */
     gap: 10px;
-    text-align: center;
-    min-height: 60px;             /* taille homogène */
+    min-height: 60px;
     padding: 12px 14px;
+    text-align: center;
   }
 
-  .page-landing .card.lang .flag{
-    font-size: 20px;
-    line-height: 1;
-  }
+  .page-landing .card.lang .flag{ font-size: 20px; line-height: 1; }
+  .page-landing .card.lang .label{ font-weight: 700; font-size: 16px; }
 
-  .page-landing .card.lang .label{
-    font-weight: 700;
-    font-size: 16px;
-  }
-
-  /* Logos : même taille, côte à côte, non rognés */
+  /* Logos : même taille, SANS boîtes */
   .page-landing .logo-row{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 12px;
     width: 100%;
     max-width: 720px;
-    margin-top: 14px;
+    margin-top: 10px;
   }
 
   .page-landing .logo{
-    height: 72px;                 /* même hauteur pour tous */
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(255,255,255,.05);
+    height: 72px;                  /* même hauteur pour tous */
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    /* ❌ plus de boîte : */
+    background: transparent;
+    border: 0;
   }
 
   .page-landing .logo img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;          /* jamais rogné */
-    padding: 10px;                /* équilibre visuel */
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;           /* jamais rogné */
+    padding: 0;                    /* pas d’encadrement visuel */
   }
