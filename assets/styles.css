@@ -787,9 +787,13 @@
       display: flex !important;
       flex-direction: column !important;
       align-items: center !important;
-      justify-content: center !important;   /* centre vertical */
-      gap: 25px !important;
-      transform: translateY(-2vh) !important;/* ⬅️ remonte un peu (ajuste -2vh à -6vh) */
+      transform: none !important;
+      justify-content: center !important;
+      gap: 16px !important;/* ⬅️ remonte un peu (ajuste -2vh à -6vh) */
+    }
+
+    body.page-landing main.container.center.language > .logo-row{
+        margin-top: 64px !important;          /* ← ESSAYE 64px, 72px, 80px */
     }
 
     /* Cartes langues : 2 colonnes (côte à côte) */
@@ -822,7 +826,7 @@
       margin-top: 8px !important;
     }
     body.page-landing .logo{
-      height: 56px !important;            /* ⬅️ taille uniforme (mets 52/60 si tu veux) */
+      height: 52px !important;            /* ⬅️ taille uniforme (mets 52/60 si tu veux) */
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
