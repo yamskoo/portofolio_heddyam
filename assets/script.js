@@ -225,37 +225,91 @@
     });
   })();
 
-  // Année du footer (sécurité si ton global ne l'a pas déjà fait ici)
+  // Année du footer (sécurité si ton global ne l'a pas déjà fait)
   (function(){
     var y = document.getElementById('y');
     if (y) y.textContent = new Date().getFullYear();
   })();
 
-  // Activer la pastille du menu selon la section visible
+  /**
+   * MODE FILTRAGE :
+   * - Une seule section visible (is-active) à la fois
+   * - Par défaut on montre #robafis (ou le hash si présent)
+   * - Les chips ne scrollent plus vers une ancre : elles filtrent l'affichage
+   * - Le menu catégories se cache quand on descend, réapparaît quand on remonte
+   */
   (function(){
     const chips = Array.from(document.querySelectorAll('.category-nav a.chip'));
-    if (!chips.length) return;
+    const catNav = document.querySelector('.category-nav');
+    const allSections = Array.from(document.querySelectorAll('.uni-section'));
+    if (!chips.length || !catNav || !allSections.length) return;
 
-    const sections = chips
-      .map(c => document.querySelector(c.getAttribute('href')))
-      .filter(Boolean);
+    // Map id -> section
+    const sectionsById = new Map(allSections.map(s => [s.id, s]));
 
-    const setActive = (hash) => {
+    // Utilitaires
+    const setActiveChip = (hash) => {
       chips.forEach(c => c.classList.toggle('is-active', c.getAttribute('href') === hash));
     };
 
-    const io = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a,b)=> b.intersectionRatio - a.intersectionRatio)[0];
-      if (!visible) return;
-      setActive('#' + visible.target.id);
-    }, { rootMargin: '-40% 0px -50% 0px', threshold: [0, .2, .4, .6, .8, 1] });
+    const showOnly = (id, pushHash=true) => {
+      allSections.forEach(s => s.classList.toggle('is-active', s.id === id));
+      setActiveChip('#' + id);
+      if (pushHash) {
+        // On met à jour l'URL sans recharger
+        if (history.replaceState) history.replaceState(null, '', '#' + id);
+        else location.hash = id;
+      }
+      // On remonte en haut de page pour bien voir le header + début de la section
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
-    sections.forEach(s => io.observe(s));
+    // Initial : hash prioritaire, sinon robafis
+    const initialId = (location.hash && sectionsById.has(location.hash.slice(1)))
+      ? location.hash.slice(1)
+      : 'robafis';
+    showOnly(initialId, /*pushHash*/ false);
 
-    // Quand on clique une chip, on met à jour l'état actif tout de suite (feedback instantané)
-    chips.forEach(c => c.addEventListener('click', () => setActive(c.getAttribute('href'))));
+    // Click sur chips -> filtrage (pas d'ancre)
+    chips.forEach(c => {
+      c.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = (c.getAttribute('href') || '').replace('#', '');
+        if (!sectionsById.has(id)) return;
+        showOnly(id, /*pushHash*/ true);
+      });
+    });
+
+    // Auto-hide du menu catégories sur scroll descendant
+    let lastY = window.scrollY || 0;
+    let ticking = false;
+    const THRESH = 8; // petit seuil pour éviter le flicker
+
+    const onScroll = () => {
+      const y = window.scrollY || 0;
+      const dy = y - lastY;
+
+      if (Math.abs(dy) > THRESH) {
+        if (dy > 0) {
+          // on descend
+          catNav.classList.add('category-nav--hidden');
+        } else {
+          // on remonte
+          catNav.classList.remove('category-nav--hidden');
+        }
+        lastY = y;
+      }
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(onScroll);
+        ticking = true;
+      }
+    }, { passive: true });
+
   })();
+
 
 
