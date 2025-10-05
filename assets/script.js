@@ -238,6 +238,7 @@
    * - Les chips ne scrollent plus vers une ancre : elles filtrent l'affichage
    * - Le menu catégories se cache quand on descend, réapparaît quand on remonte
    */
+
   (function(){
     const chips = Array.from(document.querySelectorAll('.category-nav a.chip'));
     const catNav = document.querySelector('.category-nav');
@@ -279,37 +280,68 @@
         showOnly(id, /*pushHash*/ true);
       });
     });
-
-    // Auto-hide du menu catégories sur scroll descendant
-    let lastY = window.scrollY || 0;
-    let ticking = false;
-    const THRESH = 8; // petit seuil pour éviter le flicker
-
-    const onScroll = () => {
-      const y = window.scrollY || 0;
-      const dy = y - lastY;
-
-      if (Math.abs(dy) > THRESH) {
-        if (dy > 0) {
-          // on descend
-          catNav.classList.add('category-nav--hidden');
-        } else {
-          // on remonte
-          catNav.classList.remove('category-nav--hidden');
-        }
-        lastY = y;
-      }
-      ticking = false;
-    };
-
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(onScroll);
-        ticking = true;
-      }
-    }, { passive: true });
-
   })();
 
+    // Auto-hide du menu catégories avec hystérésis (pas de clignote)
+  (function(){
+    const catNav = document.querySelector('.category-nav');
+    if(!catNav) return;
 
+    let lastY = window.scrollY || 0;
+    let baseY = lastY;
+    let hidden = false;
+    const DOWN_HIDE_AFTER = 80;  // ne cache pas tant qu'on n'a pas dépassé 80px
+    const DOWN_TRAVEL     = 70;  // distance à parcourir en descendant avant hide
+    const UP_TRAVEL       = 45;  // distance à remonter avant show
+    const DELTA_MIN       = 3;   // ignore micro mouvements
 
+    const show = () => { catNav.classList.remove('category-nav--hidden'); hidden = false; };
+    const hide = () => { catNav.classList.add('category-nav--hidden');    hidden = true;  };
+
+    const onScroll = () => {
+      const y  = window.scrollY || 0;
+      const dy = y - lastY;
+
+      // toujours visible près du haut de page
+      if (y < DOWN_HIDE_AFTER){
+        show();
+        baseY = y;
+        lastY = y;
+        return;
+      }
+
+      // si on descend franchement
+      if (dy > DELTA_MIN && !hidden){
+        const traveled = y - baseY;
+        if (traveled > DOWN_TRAVEL){
+          hide();
+          baseY = y; // reset l’ancre
+        }
+      }
+
+      // si on remonte franchement
+      if (dy < -DELTA_MIN && hidden){
+        const traveled = baseY - y;
+        if (traveled > UP_TRAVEL){
+          show();
+          baseY = y; // reset l’ancre
+        }
+      }
+
+      lastY = y;
+    };
+
+    // RAF + passive pour perf
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if(!ticking){
+        requestAnimationFrame(() => { onScroll(); ticking = false; });
+        ticking = true;
+      }
+    }, { passive:true });
+
+    // toujours montrer sur resize/orientationchange
+    ['resize','orientationchange','pageshow','visibilitychange'].forEach(ev=>{
+      window.addEventListener(ev, () => { show(); baseY = window.scrollY || 0; lastY = baseY; }, { passive:true });
+    });
+  })();

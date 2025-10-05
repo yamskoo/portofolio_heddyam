@@ -600,7 +600,8 @@
     backdrop-filter: saturate(140%) blur(8px);
     background: rgba(10,10,20,.55);
     border-bottom: 1px solid rgba(255,255,255,.08);
-    transition: transform .25s ease, opacity .25s ease;
+    will-change: transform, opacity;           /* ← aide les GPU */
+    transition: transform .28s ease, opacity .28s ease; /* ← un poil + doux */
   }
   .category-nav__inner {
     max-width: 1100px; margin: 0 auto; padding: 10px 12px;
@@ -634,7 +635,13 @@
   }
 
   /* ====== Sections ====== */
-  .uni-section { display: none; opacity: 0; transition: opacity .25s ease; }
+  .uni-section{
+    display:none; 
+    opacity:0; 
+    transition:opacity .25s ease;
+    padding: 20px 12px 10px;         /* ← ajoute ce padding */
+    border-bottom: 1px solid rgba(255,255,255,.08); /* même trait doux */
+  }
   .uni-section.is-active { display: block; opacity: 1; }
   .uni-wrap    { max-width: 1100px; margin: 0 auto; }
   .uni-head {
