@@ -780,68 +780,111 @@
   }
 
   /* ===============================
-   Landing (index) — page-only CSS
-   Scope: body.page-landing
-   =============================== */
+    Landing (index) — page-only CSS
+    Scope: body.page-landing
+    =============================== */
 
-  body.page-landing, body.page-landing html { height: 100%; }
+  body.page-landing,
+  body.page-landing html { height: 100%; }
 
   .page-landing .landing-screen{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;   /* Titre en haut, logos en bas */
-    padding: 16px 14px;
+    justify-content: space-between;       /* Titre en haut, logos en bas */
+    padding: 16px 14px 10px;
     box-sizing: border-box;
     gap: 12px;
   }
 
   /* TOP */
-  .page-landing .landing-top{ padding-top: 2px; }
+  .page-landing .landing-top{ padding-top: 4px; }
   .page-landing .landing-title{
-    font-size: 24px; font-weight: 800; margin: 0; line-height: 1.15; letter-spacing: .2px;
+    /* 🔥 plus grand et prioritaire */
+    font-size: clamp(28px, 9vw, 42px);
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.12;
+    letter-spacing: .2px;
   }
   .page-landing .landing-subtitle{
-    font-size: 13px; opacity: .85; margin: 4px 0 0 0;
+    font-size: 13.5px;
+    opacity: .9;
+    margin: 6px 0 0 0;
   }
 
-  /* Choix de langue */
+  /* LANG CHOICES — vrais boîtiers (pills) bien visibles */
   .page-landing .landing-lang{
-    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;       /* côte à côte */
+    gap: 12px;
+    margin-top: 12px;
   }
   .page-landing .lang-btn{
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 12px 14px; border-radius: 12px;
-    background: #171b23; border: 1px solid #262b36; color: #fff; text-decoration: none;
-    font-weight: 600; font-size: 15px; min-height: 48px; box-shadow: 0 6px 18px rgba(0,0,0,.25);
+    /* boîtiers solides, non impactés par les styles “card” globaux */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+    border: 1.25px solid rgba(255,255,255,.16);
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;                      /* 🔥 plus lisible */
+    min-height: 52px;                     /* confort tactile */
+    box-shadow: 0 10px 28px rgba(0,0,0,.35);
+    transition: transform .15s ease, border-color .2s ease, box-shadow .2s ease;
   }
-  .page-landing .lang-btn:active{ transform: scale(.99); }
-  .page-landing .flag{ font-size: 18px; line-height: 1; }
+  .page-landing .lang-btn:hover{
+    border-color: rgba(124,58,237,.45);
+    box-shadow: 0 14px 36px rgba(0,0,0,.45);
+  }
+  .page-landing .lang-btn:active{ transform: scale(.985); }
+  .page-landing .flag{ font-size: 20px; line-height: 1; }
   .page-landing .lang-label{ display:inline-block; }
 
-  /* Logos bas de page */
+  /* LOGOS — réguliers quel que soit le format (PNG/JPG/WEBP/SVG) */
   .page-landing .landing-logos{
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding-bottom: 4px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    /* on évite le scroll : bloc compact en bas */
+    margin-top: 8px;
   }
   .page-landing .logo{
-    aspect-ratio: 1 / 1; border-radius: 10px; background: #0b0d11; border: 1px solid #262b36;
-    display: flex; align-items: center; justify-content: center; overflow: hidden;
+    aspect-ratio: 1 / 1;                  /* carré strict pour l’alignement */
+    border-radius: 12px;
+    background: #0b0d11;                  /* fond propre */
+    border: 1px solid rgba(255,255,255,.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
   .page-landing .logo img{
-    width: 82%; height: 82%; object-fit: contain; /* pas rogné */
+    /* le logo n'est JAMAIS rogné, toujours centré */
+    max-width: 86%;
+    max-height: 86%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    /* petit padding optique pour les logos “pleins” */
+    padding: 6%;
+    display: block;
   }
 
-  /* Ajustements petits écrans */
+  /* Ajustements très petits écrans (hauteurs réduites) */
   @media (max-height: 640px){
-    .page-landing .landing-title{ font-size: 22px; }
-    .page-landing .lang-btn{ min-height: 46px; padding: 11px 12px; }
-    .page-landing .logo img{ width: 78%; height: 78%; }
+    .page-landing .landing-title{ font-size: clamp(26px, 8.2vw, 36px); }
+    .page-landing .lang-btn{ min-height: 48px; padding: 12px 14px; font-size: 15px; }
+    .page-landing .logo img{ max-width: 82%; max-height: 82%; padding: 5%; }
   }
+  /* Petites largeurs */
   @media (max-width: 360px){
-    .page-landing .landing-title{ font-size: 22px; }
+    .page-landing .landing-title{ font-size: clamp(24px, 9.5vw, 34px); }
     .page-landing .landing-subtitle{ font-size: 12.5px; }
-    .page-landing .lang-btn{ font-size: 14px; }
+    .page-landing .lang-btn{ font-size: 14.5px; }
   }
-
-
-
