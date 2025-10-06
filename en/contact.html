@@ -8,33 +8,109 @@
 </head>
 <body>
   <header class="nav">
-    <div class="brand"><span class="dot"></span> Yamine · Portfolio</a></div>
-
+    <div class="brand"><span class="dot"></span> Yamine · Portfolio</div>
     <button class="hamburger" aria-controls="main-menu" aria-expanded="false" aria-label="Open menu">☰</button>
-
     <nav id="main-menu" class="menu">
       <a href="index.html">Home</a>
-      <a href="whoami.html">About me</a>
-      <a href="professional.html">Professional</a>
-      <a href="academic.html">Academic</a>
-      <a href="../fr/contact.html">FR</a>
+      <a href="quisuisje.html">About me</a>
+      <a href="professionnel.html">Professional</a>
+      <a href="universitaire.html">Academic</a>
+      <a href="../en/contact.html">EN</a>
     </nav>
   </header>
 
-  <section class="section reveal">
-    <h2 class="glow">Contact</h2>
-    <p>I'm open to opportunities in software, systems integration, and Industry 4.0.</p>
+  <main>
+    <!-- Intro -->
+    <section class="section reveal contact-intro">
+      <h1 class="glow">Contact</h1>
+      <p class="lead">
+        Currently seeking a <strong>permanent or fixed-term role (CDI/CDD) in France</strong> in
+        system development & integration (software, robotics, Industry&nbsp;4.0).<br />
+        Also open to a <strong>V.I.E</strong> or <strong>Graduate Program</strong> abroad
+        (Asia, Middle East, North America).<br /><br />
+        This portfolio reflects my <strong>motivation</strong> and <strong>determination</strong> to deliver
+        concrete solutions, learn fast, and contribute positively to your company.
+      </p>
+    </section>
 
-    <div class="tiles">
-      <a class="card" href="mailto:yamine.kasko@edu.devinci.fr">Email — yamine.kasko@edu.devinci.fr</a>
-      <a class="card" href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn — /in/your-handle</a>
-      <a class="card" href="https://github.com/yamskoo" target="_blank" rel="noopener">GitHub — yamskoo</a>
-      <a class="card" href="../assets/Yamine_CV.pdf" download>Download CV (PDF)</a>
-    </div>
-  </section>
+    <!-- Contact details -->
+    <section class="section reveal">
+      <h2 class="u-glow">Contact details</h2>
+
+      <div class="contact-grid">
+        <!-- Email -->
+        <a class="card contact-item" href="mailto:hykasko.pro@gmail.com">
+          <span class="ci-icon" aria-hidden="true">✉️</span>
+          <div class="ci-body">
+            <strong>Email</strong>
+            <span>hykasko.pro@gmail.com</span>
+          </div>
+        </a>
+
+        <!-- Phone (opens Phone app on mobile) -->
+        <a class="card contact-item" href="tel:+33652443249">
+          <span class="ci-icon" aria-hidden="true">📞</span>
+          <div class="ci-body">
+            <strong>Phone</strong>
+            <span>+33 6 52 44 32 49</span>
+          </div>
+        </a>
+
+        <!-- Resume -->
+        <a class="card contact-item" href="../assets/cvheddyyaminefr.pdf" download>
+          <span class="ci-icon" aria-hidden="true">📄</span>
+          <div class="ci-body">
+            <strong>Resume</strong>
+            <span>Download PDF</span>
+          </div>
+        </a>
+
+        <!-- References -->
+        <div class="card refs">
+          <div class="refs-head">
+            <span class="ci-icon" aria-hidden="true">🤝</span>
+            <div>
+              <strong>References</strong>
+              <p class="refs-sub">People who can vouch for my professionalism and skills.</p>
+            </div>
+          </div>
+
+          <ul class="refs-grid">
+            <li class="ref">
+              <div class="ref-name">Pierre Chauvin</div>
+              <div class="ref-role">Integration Engineer · <span class="ref-company">Thales&nbsp;LAS</span></div>
+              <a class="ref-email" href="mailto:pierre.chauvin@thalesgroup.com">pierre.chauvin@thalesgroup.com</a>
+            </li>
+            <li class="ref">
+              <div class="ref-name">Thierry Conan</div>
+              <div class="ref-role">Integration Manager · <span class="ref-company">Thales&nbsp;LAS</span></div>
+              <a class="ref-email" href="mailto:thierry.conan@thalesgroup.com">thierry.conan@thalesgroup.com</a>
+            </li>
+            <li class="ref">
+              <div class="ref-name">Michael La Louze</div>
+              <div class="ref-role">Industry 4.0 Engineer · <span class="ref-company">Thales&nbsp;AVS</span></div>
+              <a class="ref-email" href="mailto:michael.la-louze@thalesgroup.com">michael.la-louze@thalesgroup.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Social (PNG logos side by side) -->
+      <div class="social-row">
+        <a class="social-card" href="https://www.linkedin.com/in/yamine-kasko" target="_blank" rel="noopener">
+          <img class="social-img" src="../photo/linkedin.jpg" alt="LinkedIn" />
+          <span>LinkedIn</span>
+        </a>
+        <a class="social-card" href="https://github.com/yamskoo" target="_blank" rel="noopener">
+          <img class="social-img" src="../photo/github.png" alt="GitHub" />
+          <span>GitHub</span>
+        </a>
+      </div>
+    </section>
+  </main>
 
   <footer>© <span id="y"></span> Yamine</footer>
-  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
   <script src="../assets/script.js"></script>
 </body>
 </html>
