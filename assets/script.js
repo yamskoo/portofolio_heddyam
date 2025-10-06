@@ -367,5 +367,17 @@
     });
   })();
 
+    /* Contact page — (optionnel) petit feedback au tap sur social-card */
+  (function(){
+    const cards = document.querySelectorAll('.social-card, .contact-item');
+    if(!cards.length) return;
+    cards.forEach(el=>{
+      el.addEventListener('mousedown', ()=> el.style.transform='scale(0.995)');
+      ['mouseup','mouseleave','blur'].forEach(ev=>
+        el.addEventListener(ev, ()=> el.style.transform=''));
+    });
+  })();
+
+
   
 

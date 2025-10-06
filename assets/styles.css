@@ -844,7 +844,7 @@
   }
 
   /* ===== Contact page ===== */
-  .contact-intro .lead { color:#cfd3e6; max-width: 900px; }
+  .contact-intro .lead { color:#cfd3e6; max-width:900px; }
 
   .contact-grid{
     display:grid;
@@ -852,7 +852,7 @@
     gap:14px; margin-top:12px;
   }
   .contact-item{
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    display:flex; align-items:center; gap:12px;
   }
   .ci-body{ display:flex; align-items:flex-start; gap:10px; text-decoration:none; color:inherit; }
   .ci-body strong{ display:block; line-height:1.2; }
@@ -865,34 +865,70 @@
     background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
     border:1px solid rgba(255,255,255,.12);
     box-shadow: var(--shadow);
-    margin-right:6px;
   }
 
-  .copy-btn{
-    margin-left:auto;
-    min-height:36px;
-    padding:8px 12px;
+  /* ===== Référents — présentation colorée ===== */
+  .refs{
+    padding:16px; border-radius:var(--radius);
+    border:1px solid rgba(255,255,255,.12);
+    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    box-shadow: var(--shadow);
+    position:relative;
+  }
+  .refs::before{
+    content:""; position:absolute; inset:0 auto 0 0; width:6px; border-radius:6px 0 0 6px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  }
+  .refs-head{
+    display:flex; align-items:flex-start; gap:10px; margin-bottom:10px;
+  }
+  .refs-sub{
+    margin:.5px 0 0; font-size:13px; color:var(--muted);
   }
 
-  /* Bloc références */
-  .refs .refs-list{ margin:6px 0 0; padding-left:16px; }
-  .refs .refs-list li{ margin:6px 0; font-size:14px; line-height:1.45; }
-  .refs .refs-list a{ color:inherit; opacity:.95; }
-  .refs .refs-list a:hover{ opacity:1; text-decoration:underline; }
+  .refs-grid{
+    display:grid; gap:10px; margin:0; padding:0; list-style:none;
+  }
+  .ref{
+    padding:10px 12px; border-radius:12px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.10);
+    transition:transform .18s ease, border-color .18s ease;
+  }
+  .ref:hover{ transform:translateY(-1px); border-color:rgba(124,58,237,.35); }
+  .ref-name{
+    font-weight:800; letter-spacing:.2px;
+  }
+  .ref-role{
+    margin-top:2px; font-size:13.5px; color:#cfd3e6;
+  }
+  .ref-company{
+    color:#ddd; background: linear-gradient(90deg, rgba(124,58,237,.28), rgba(37,99,235,.28));
+    padding:.05em .35em; border-radius:6px;
+  }
+  .ref-email{
+    display:inline-block; margin-top:6px; font-size:13.5px; text-decoration:none;
+    padding:6px 10px; border-radius:999px;
+    border:1px solid rgba(255,255,255,.16);
+    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    color:var(--text); opacity:.95;
+  }
+  .ref-email:hover{ opacity:1; border-color:rgba(124,58,237,.45); }
 
-  /* Réseaux sociaux côte à côte */
+  /* ===== Réseaux sociaux (PNG) ===== */
   .social-row{
     display:flex; gap:12px; margin-top:16px; flex-wrap:wrap;
   }
   .social-card{
     display:inline-flex; align-items:center; gap:10px;
-    padding:12px 14px; min-height:44px;
+    padding:10px 12px; min-height:44px;
     border-radius:12px; border:1px solid rgba(255,255,255,.12);
     background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
     box-shadow:var(--shadow); text-decoration:none; color:var(--text);
     transition:transform .2s ease, border-color .2s ease;
   }
   .social-card:hover{ transform:translateY(-1px); border-color:rgba(124,58,237,.45); }
-  .social-ico{ width:22px; height:22px; fill:#e8e8f0; display:block; }
-
-
+  .social-img{
+    width:26px; height:26px; display:block; object-fit:contain;
+    filter:saturate(108%);
+  }

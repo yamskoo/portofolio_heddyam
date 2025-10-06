@@ -47,19 +47,14 @@
           </div>
         </a>
 
-        <!-- Téléphone -->
-        <div class="card contact-item">
-          <a class="ci-body" href="tel:+33652443249">
-            <span class="ci-icon" aria-hidden="true">📞</span>
-            <div>
-              <strong>Téléphone</strong>
-              <span>+33 6 52 44 32 49</span>
-            </div>
-          </a>
-          <button class="button copy-btn" data-copy="+33652443249" type="button" title="Copier le numéro">
-            Copier
-          </button>
-        </div>
+        <!-- Téléphone (lance l'app Téléphone sur mobile) -->
+        <a class="card contact-item" href="tel:+33652443249">
+          <span class="ci-icon" aria-hidden="true">📞</span>
+          <div class="ci-body">
+            <strong>Téléphone</strong>
+            <span>+33 6 52 44 32 49</span>
+          </div>
+        </a>
 
         <!-- CV -->
         <a class="card contact-item" href="../assets/cvheddyyaminefr.pdf" download>
@@ -71,43 +66,43 @@
         </a>
 
         <!-- Référents -->
-        <div class="card contact-item refs">
-          <span class="ci-icon" aria-hidden="true">🤝</span>
-          <div class="ci-body">
-            <strong>Référents (recommandations)</strong>
-            <ul class="refs-list">
-              <li>
-                <span>Pierre Chauvin — Ingénieur intégration, Thales LAS</span>
-                <a href="mailto:pierre.chauvin@thalesgroup.com">pierre.chauvin@thalesgroup.com</a>
-              </li>
-              <li>
-                <span>Thierry Conan — Manager intégration, Thales LAS</span>
-                <a href="mailto:thierry.conan@thalesgroup.com">thierry.conan@thalesgroup.com</a>
-              </li>
-              <li>
-                <span>Michael La Louze — Ingénieur Industrie 4.0, Thales AVS</span>
-                <a href="mailto:michael.la-louze@thalesgroup.com">michael.la-louze@thalesgroup.com</a>
-              </li>
-            </ul>
+        <div class="card refs">
+          <div class="refs-head">
+            <span class="ci-icon" aria-hidden="true">🤝</span>
+            <div>
+              <strong>Référents</strong>
+              <p class="refs-sub">Des personnes qui peuvent attester de mon sérieux et de mes compétences.</p>
+            </div>
           </div>
+
+          <ul class="refs-grid">
+            <li class="ref">
+              <div class="ref-name">Pierre Chauvin</div>
+              <div class="ref-role">Ingénieur intégration · <span class="ref-company">Thales&nbsp;LAS</span></div>
+              <a class="ref-email" href="mailto:pierre.chauvin@thalesgroup.com">pierre.chauvin@thalesgroup.com</a>
+            </li>
+            <li class="ref">
+              <div class="ref-name">Thierry Conan</div>
+              <div class="ref-role">Manager intégration · <span class="ref-company">Thales&nbsp;LAS</span></div>
+              <a class="ref-email" href="mailto:thierry.conan@thalesgroup.com">thierry.conan@thalesgroup.com</a>
+            </li>
+            <li class="ref">
+              <div class="ref-name">Michael La Louze</div>
+              <div class="ref-role">Ingénieur Industrie 4.0 · <span class="ref-company">Thales&nbsp;AVS</span></div>
+              <a class="ref-email" href="mailto:michael.la-louze@thalesgroup.com">michael.la-louze@thalesgroup.com</a>
+            </li>
+          </ul>
         </div>
       </div>
 
-      <!-- Réseaux (logos côte à côte) -->
+      <!-- Réseaux (logos PNG côte à côte) -->
       <div class="social-row">
         <a class="social-card" href="https://www.linkedin.com/in/yamine-kasko" target="_blank" rel="noopener">
-          <!-- LinkedIn SVG -->
-          <svg viewBox="0 0 24 24" aria-hidden="true" class="social-ico">
-            <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0zM8 8h4.8v2.2h.07c.67-1.2 2.32-2.47 4.78-2.47 5.11 0 6.06 3.36 6.06 7.73V24h-5v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V24H8z"/>
-          </svg>
+          <img class="social-img" src="../photo/linkedin.jpg" alt="LinkedIn" />
           <span>LinkedIn</span>
         </a>
-
         <a class="social-card" href="https://github.com/yamskoo" target="_blank" rel="noopener">
-          <!-- GitHub SVG -->
-          <svg viewBox="0 0 24 24" aria-hidden="true" class="social-ico">
-            <path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.1.82-.26.82-.58v-2.16c-3.34.73-4.04-1.61-4.04-1.61-.55-1.41-1.35-1.79-1.35-1.79-1.1-.75.08-.73.08-.73 1.22.09 1.87 1.26 1.87 1.26 1.08 1.85 2.83 1.32 3.52 1.01.11-.78.42-1.32.76-1.62-2.67-.3-5.48-1.33-5.48-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.57.12-3.28 0 0 1.01-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.71.24 2.97.12 3.28.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.38.81 1.12.81 2.26v3.35c0 .32.22.69.83.57A12 12 0 0 0 12 .5z"/>
-          </svg>
+          <img class="social-img" src="../photo/github.jpg" alt="GitHub" />
           <span>GitHub</span>
         </a>
       </div>
@@ -117,20 +112,5 @@
   <footer>© <span id="y"></span> Yamine</footer>
   <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
   <script src="../assets/script.js"></script>
-
-  <!-- Copie du numéro (léger, indépendant de script.js) -->
-  <script>
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.copy-btn');
-      if(!btn) return;
-      const txt = btn.dataset.copy || '';
-      if(!txt) return;
-      navigator.clipboard.writeText(txt).then(()=>{
-        const old = btn.textContent;
-        btn.textContent = 'Copié ✓';
-        setTimeout(()=> btn.textContent = old, 1500);
-      });
-    });
-  </script>
 </body>
 </html>
